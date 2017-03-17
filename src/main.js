@@ -1,28 +1,20 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import App from './layout/App.vue';
+import routes from './routes';
+import App from './App.vue';
 
 // 加载router插件
 Vue.use(VueRouter);
 
-// 定义静态组件
-const Home = { template: '<div>Welcome to home page.</div>' };
-const About = { template: '<div>this is about page.</div>' };
-const User = { template: '<div>username is {{ $route.params.username }}</div>'}
-
-// 路由实例配置信息
-var routes = [
-    { path: '/home', component: Home },
-    { path: '/about', component: About },
-    { path: '/user/:username', component: User }
-]
-
+// new 一个router实例
 var router = new VueRouter({
-    routes: routes
+    routes: routes,
+    mode: 'hash'
 });
 
+// 将配置好的router实例装在vue实例中
 var app = new Vue({
     router: router,
     el: '#app',
     render: h => h(App)
-})
+});
