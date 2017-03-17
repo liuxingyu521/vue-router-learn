@@ -1,0 +1,31 @@
+{
+  "name": "test-page",
+  "version": "1.0.0",
+  "description": "a test Dir for vue-plugins with webpack-dev-server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --inline --hot"
+  },
+  "keywords": [
+    "vue",
+    "vue-plugins",
+    "webpack",
+    "webpack-dev-server"
+  ],
+  "author": "Richard",
+  "license": "ISC",
+  "dependencies": {
+    "vue": "^2.2.4",
+    "vue-router": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.0",
+    "css-loader": "^0.27.3",
+    "vue-loader": "^11.1.4",
+    "vue-template-compiler": "^2.2.4",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.2"
+  }
+}
