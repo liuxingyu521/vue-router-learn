@@ -1,5 +1,5 @@
 export default [
-    { path: '/home', component: require('./pages/Home.vue') },
+    { path: '/', component: require('./pages/index.vue') },
     { path: '/about', component: require('./pages/About.vue') },
     { path: '/article', 
       component: require('./pages/Article.vue'),

@@ -1,36 +1,22 @@
 <template>
-  <div class="container">
-    <my-head></my-head>
-    <!-- <my-body></my-body> -->
-    <!-- <my-footer></my-footer> -->
+  <div class="app">
+    <my-head>标题</my-head>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import MyHead from './layout/head.vue';
-  // import MyBody from './layout/body.vue';
-  // import MyFooter from './layout/footer.vue';
-
+  import MyHead from './layout/head.vue'
+  // import MyHead from './components/x-header.vue'
+  
   export default {
-    data (){
-      return {
-        msg: 'app.vue'
-      }
-    },
     components: {
-      MyHead: MyHead,
-      // MyBody: MyBody,
-      // MyFooter: MyFooter
+      MyHead
     }
   }
 </script>
 
 <style>
-  .container{
-    margin: 0;
-    padding: 0;
-  }
   .router-link-active{
     color: red !important;
   }

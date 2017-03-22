@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <ul class="nav">
-      <li><router-link to='/home'>首页</router-link></li>
+      <li><router-link to='/' exact>首页</router-link></li>
       <li><router-link to='/article'>文章</router-link></li>
       <li><router-link to='/about'>关于</router-link></li>
     </ul>
@@ -10,7 +10,7 @@
 
 <script>
   export default {
-    data(){
+    data () {
       return {
         msg: 'lala'
       }
@@ -33,7 +33,5 @@
     border-radius: 5px;
     color: #653a2c;
   }
-  ul.nav li a:hover{
-    background-color: #c1e3e8;
-  }
+
 </style>
