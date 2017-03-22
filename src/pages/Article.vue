@@ -5,6 +5,7 @@
         <router-link :to="{path: '/article/list/' + article.id }">{{ article.type }}</router-link>
       </li>
     </ul>
+    <router-view></router-view>
   </div>
 </template>
 

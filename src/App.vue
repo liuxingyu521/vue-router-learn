@@ -1,7 +1,9 @@
 <template>
   <div class="app">
     <my-head>标题</my-head>
-    <router-view></router-view>
+    <transition name='index-com'>
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -16,7 +18,14 @@
   }
 </script>
 
-<style>
+<style lang='less'>
+  @import './styles/reset.less';
+  .index-com-enter-active, .index-com-leave-active {
+    transition: opacity .5s
+  }
+  .index-com-enter, .index-com-leave-active {
+    opacity: 0
+  }
   .router-link-active{
     color: red !important;
   }

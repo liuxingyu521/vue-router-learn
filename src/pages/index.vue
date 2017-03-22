@@ -1,12 +1,12 @@
 <template>
-  <masker>
-    <div class="m-img" style="background-image:url(https://cdn.xiaotaojiang.com/uploads/56/4b3601364b86fdfd234ef11d8712ad/_.jpg)"></div>
-    <div slot="content" class="m-title">
-      VUX
-      <br>
-      <span class="m-time">2017-03-21</span>
-    </div>
-  </masker>
+    <masker>
+      <div class="m-img" style="background-image:url(https://cdn.xiaotaojiang.com/uploads/56/4b3601364b86fdfd234ef11d8712ad/_.jpg)"></div>
+      <div slot="content" class="m-title">
+        VUX
+        <br>
+        <span class="m-time">2017-03-21</span>
+      </div>
+    </masker>
 </template>
 
 <script>
