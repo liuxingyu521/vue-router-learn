@@ -1,10 +1,9 @@
 export default [
-    { path: '/', component: require('./pages/index.vue') },
-    { path: '/about', component: require('./pages/About.vue') },
-    { path: '/article', 
-      component: require('./pages/Article.vue'),
+    { path: '/', component: require('./pages/login.vue'), redirect: '/login' },
+    { path: '/user/:id', component: require('./pages/userMain.vue'),
       children: [
-        { path: 'list/:num',component: require('./pages/List.vue')}
+        { path: 'flow', name: 'flow', component: require('./pages/subPage/flow.vue')},
+        { path: 'statistics', name: 'statistics', component: require('./pages/subPage/statistics.vue'), redirect: 'pieChart'}
       ]
     }
 ]

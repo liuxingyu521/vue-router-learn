@@ -16,16 +16,19 @@ module.exports ={
             test: /\.js$/,
             use: 'babel-loader',
             exclude: path.resolve(__dirname, '/node_modules/')
+        },{
+            test: /\.less/,
+            use: 'less-loader'
         }]
     },
     devServer: {
         host: '0.0.0.0'
+    },
+    resolve: {
+        alias: {
+            'vue': 'vue/dist/vue.js'
+        }
     }
-    // resolve: {
-    //     alias: {
-    //         'vue': 'vue/dist/vue.js'
-    //     }
-    // }
 }
 
 

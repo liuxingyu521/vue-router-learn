@@ -2,7 +2,7 @@
   <div class="app">
     <my-head>标题</my-head>
     <transition name='index-com'>
-      <router-view></router-view>
+      <router-view class='child-page'></router-view>
     </transition>
   </div>
 </template>
@@ -21,7 +21,7 @@
 <style lang='less'>
   @import './styles/reset.less';
   .index-com-enter-active, .index-com-leave-active {
-    transition: opacity .5s
+    transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
   }
   .index-com-enter, .index-com-leave-active {
     opacity: 0

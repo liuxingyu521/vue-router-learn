@@ -51,7 +51,6 @@ export default {
 
 <style lang="less">
 @import '../styles/variable.less';
-
 .vux-header {
   position: relative;
   padding: 3px 0;

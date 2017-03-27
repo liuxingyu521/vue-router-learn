@@ -20,7 +20,7 @@
 
 <style>
   .header{
-    padding: 5px 10px;
+    padding: 15px 15px;
     background-color: #81d0c1;
   }
   ul.nav li{
