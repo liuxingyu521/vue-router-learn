@@ -2,10 +2,10 @@
   <div class="page">
     <header>账单管家</header>
     <form id="loginForm">
-      <div class="form-item" :class="{ isFocus: isFocus}">
+      <div class="form-item" :class="">
         <input type="text" class="input-username" placeholder="请输入账户名" v-model="username" @focus="focus" @blur="blur">
       </div>
-      <div class="form-item" :class="{ isFocus: isFocus}">
+      <div class="form-item">
         <input type="password" class="input-password" placeholder="请输入密码" v-model="password" @focus="focus" @blur="blur">
       </div>
       <div class="form-item submit">
@@ -18,12 +18,12 @@
 </template>
 
 <script>
+  import $ from 'jquery'
   export default {
     data: function(){
       return {
         username: '',
-        password: '',
-        isFocus: false
+        password: ''
       }
     },
     methods: {
@@ -33,8 +33,9 @@
       focus: function () {
         this.isFocus = true;
       },
-      blur: function () {
-        this.isFocus = false;
+      blur: function (e) {
+        
+        console.log($);
       }
     }
   }
