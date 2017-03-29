@@ -1,6 +1,5 @@
 var path = require('path');
 
-// var webpackConfig = {
 module.exports ={
     entry: './src/main',
     output: {
@@ -19,6 +18,12 @@ module.exports ={
         },{
             test: /\.less/,
             use: 'less-loader'
+        },{
+            test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+            loader: 'url-loader',
+            query: {
+              limit: 10000
+            }
         }]
     },
     devServer: {
@@ -26,7 +31,8 @@ module.exports ={
     },
     resolve: {
         alias: {
-            'vue': 'vue/dist/vue.js'
+            'vue': 'vue/dist/vue.js',
+            'assets': path.resolve(__dirname, './src/assets'),
         }
     }
 }
