@@ -2,10 +2,12 @@
   <div class="page">
     <header>账单管家</header>
     <form id="loginForm">
-      <div class="form-item" :class="">
+      <div class="form-item">
+        <i class="iconfont icon-yonghuming"></i> 
         <input type="text" class="input-username" placeholder="请输入账户名" v-model="username" @focus="focus" @blur="blur">
       </div>
       <div class="form-item">
+        <i class="iconfont icon-mima"></i>
         <input type="password" class="input-password" placeholder="请输入密码" v-model="password" @focus="focus" @blur="blur">
       </div>
       <div class="form-item submit">
@@ -28,20 +30,22 @@
     },
     methods: {
       login: function(){
-
+        console.log(this.username+' && '+this.password);
       },
-      focus: function () {
-        this.isFocus = true;
+      focus: function (e) {
+        $(e.target).parent().addClass('isFocus');
+        $(e.target).prev().addClass('focus');
       },
       blur: function (e) {
-        
-        console.log($);
+        $(e.target).parent().removeClass('isFocus');
+        $(e.target).prev().removeClass('focus');
       }
     }
   }
 </script>
 
-<style scoped>
+<style>
+  @import '../assets/css/iconfont.css';
   .page {
     background-image: url('../assets/img/loginBg.jpeg');
     background-repeat: no-repeat;
@@ -49,7 +53,7 @@
     padding-top: 2rem;
     padding-bottom: 11rem;
   }
-  header {
+  .page header {
     height: 10rem;
     text-align: center;
     line-height: 10rem;
@@ -61,7 +65,7 @@
     text-align: center;
   }
   .form-item {
-    margin-top: 1rem;
+    margin-top: 1.3rem;
     position: relative;
   }
   .form-item:not(.submit):before {
@@ -107,19 +111,35 @@
     background: rgba(255, 255, 255, 0);
     border: none;
     border-bottom: 1px solid #777;
-    text-indent: 2rem;
+    text-indent: 2.3rem;
     font-size: .8rem;
     box-sizing: border-box;
   }
-  button.login {
+  .form-item button {
     width: 90%;
     height: 2.5rem;
     line-height: 2.5rem;
-    font-size: 1rem;
-    color: white;
+    font-size: 1rem;  
     border: 1px solid rgba(255,255,255,0);
-    background: #ff8737;
     border-radius: 1.3rem;
+    margin-bottom: .5rem;
+  }
+  .form-item button.login, .form-item button.register {
+    background: #ff8737;
+    color: white;
+  }
+  /* 字体图标的设置 */
+  .icon-yonghuming:before, .icon-mima:before, .icon-mima2:before { 
+    position: absolute;
+    left: .5rem;
+    top: .2rem;
+  }
+  .icon-yonghuming, .icon-mima, .icon-mima2 {
+    color: #777;
+    font-size: 1rem;
+  }
+  .icon-yonghuming.focus, .icon-mima.focus, .icon-mima2.focus {
+    color: #ff8737;
   }
 </style>
 

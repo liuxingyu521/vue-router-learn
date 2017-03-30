@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routes from './routes';
-import App from './App.vue'
-
+import App from './App.vue';
 
 // 加载router插件
 Vue.use(VueRouter);
@@ -19,6 +18,8 @@ var app = new Vue({
   el: '#app',
   render: h => h(App)
 });
+
+console.log(app);
 
 
 

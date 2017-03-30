@@ -25,10 +25,16 @@ module.exports = {
             query: {
                 limit: 10000
             }
+        },{
+            test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+            loader: 'url-loader',
+            query: {
+              limit: 10000
+            }
         }]
     },
     devServer: {
-        // host: '0.0.0.0'
+        host: '0.0.0.0'
     },
     resolve: {
         alias: {
