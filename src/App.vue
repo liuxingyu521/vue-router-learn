@@ -15,7 +15,7 @@
 </script>
 
 <style lang='less'>
-  /*@import './styles/reset.less';*/
+  @import './assets/css/reset.less';
   .app{
     width: 100%;
   }
