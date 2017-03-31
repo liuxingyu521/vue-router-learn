@@ -13,13 +13,15 @@ var router = new VueRouter({
 });
 
 // 将配置好的router实例装在vue实例中
-var app = new Vue({
-  router,
+new Vue({
+  router: router,
   el: '#app',
-  render: h => h(App)
+  render: function(h){
+    return h(App);
+  }
 });
 
-console.log(app);
+// console.log(app);
 
 
 

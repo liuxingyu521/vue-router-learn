@@ -34,7 +34,8 @@ module.exports = {
         }]
     },
     devServer: {
-        host: '0.0.0.0'
+        host: '192.168.30.24',
+        port: '8888'
     },
     resolve: {
         alias: {
