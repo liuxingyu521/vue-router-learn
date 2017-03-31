@@ -34,8 +34,13 @@ module.exports = {
         }]
     },
     devServer: {
-        host: '0.0.0.0',
-        port: '8888'
+        // host: '0.0.0.0',
+        port: '8888',
+        proxy: {
+          '/users': {
+            'target': 'http://localhost:8000'
+          }
+        }
     },
     resolve: {
         alias: {
