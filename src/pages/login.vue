@@ -21,6 +21,7 @@
 
 <script>
   import $ from 'jquery';
+  import axios from 'axios';
   export default {
     data: function(){
       return {
@@ -31,6 +32,16 @@
     methods: {
       login: function(){
         console.log(this.username+' && '+this.password);
+        axios.post('/users',{
+          username: this.username,
+          password: this.password
+        })
+        .then(function(response){
+          console.log(response);
+        })
+        .catch(function(error){
+          console.log(error);
+        })
       },
       focus: function (e) {
         $(e.target).parent().addClass('isFocus');
