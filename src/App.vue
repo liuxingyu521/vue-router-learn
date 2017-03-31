@@ -1,13 +1,12 @@
 <template>
   <div class="app">
     <router-view></router-view>
-    alksjdf
   </div>
 </template>
 
 <script>
   export default {
-    data() {
+    data: function() {
       return {
         title: '账单管家'
       }

@@ -34,13 +34,12 @@ module.exports = {
         }]
     },
     devServer: {
-        host: '192.168.30.24',
+        host: '0.0.0.0',
         port: '8888'
     },
     resolve: {
         alias: {
             'vue': 'vue/dist/vue.js',
-            'assets': path.resolve(__dirname, './src/assets')
         }
     },
     plugins: [
