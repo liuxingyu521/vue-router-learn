@@ -33,11 +33,13 @@
       }
     },
     methods: {
-      login: function(){
-        this.$router.push('login');
+      login: function(e){
+        e.preventDefault();
+        this.$router.push('/login');
       },
-      register: function(){
-
+      register: function(e){
+        e.preventDefault();
+        this.$router.push('/login');
       },
       focus: function (e) {
         $(e.target).parent().addClass('isFocus');

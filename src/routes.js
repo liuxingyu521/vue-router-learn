@@ -10,6 +10,6 @@ export default [
           { path: 'editProfile', name: 'editProfile', component: require('./pages/subPage/editProfile.vue')}
       ]
     },
-    { path: '/login', component: require('./pages/login.vue')},
-    { path: '/register', component: require('./pages/register.vue')}
+    { path: '/login', name: 'login', component: require('./pages/login.vue')},
+    { path: '/register', name: 'register', component: require('./pages/register.vue')}
 ]

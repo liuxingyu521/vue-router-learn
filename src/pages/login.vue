@@ -1,14 +1,14 @@
 <template>
   <div class="page">
     <header>账单管家</header>
-    <form id="loginForm">
+    <form id="loginForm" >
       <div class="form-item">
         <i class="iconfont icon-yonghuming"></i> 
-        <input type="text" class="input-username" placeholder="请输入账户名" v-model="username" @focus="focus" @blur="blur">
+        <input type="text" class="input-username" placeholder="请输入账户名" v-model="username"  @focus="focus" @blur="blur">
       </div>
       <div class="form-item">
         <i class="iconfont icon-mima"></i>
-        <input type="password" class="input-password" placeholder="请输入密码" v-model="password" @focus="focus" @blur="blur">
+        <input type="password" class="input-password" placeholder="请输入密码" v-model="password"  @focus="focus" @blur="blur">
       </div>
       <div class="form-item submit">
         <button class="login" @click="login">确认登录</button>
@@ -16,32 +16,53 @@
         <router-link to="/register" >没有账号？点击注册</router-link>
       </div>
     </form>
+    <toast v-model="showPositionValue" type="text" :time="1200" is-show-mask width="20em" :position="position">{{ message }}</toast>
+    <!-- <toast v-model="showPositionValue" type="text" width="20em">{{$t('show me code')}}</toast> -->
   </div>
 </template>
 
 <script>
   import $ from 'jquery';
   import axios from 'axios';
+  import Toast from '../components/toast.vue';
+
   export default {
     data: function(){
       return {
         username: '',
-        password: ''
+        password: '',
+        showPositionValue: false,
+        message: '',
+        position: ''
       }
     },
+    components:{
+      Toast: Toast
+    },
     methods: {
-      login: function(){
-        console.log(this.username+' && '+this.password);
+      login: function(e){
+        // 防止默认提交表单
+        e.preventDefault();
+        var _this = this;
         axios.post('/users',{
           username: this.username,
           password: this.password
         })
-        .then(function(response){
-          console.log(response);
+        .then(function(res){
+          console.log(res.data)
+          if(res.data == 1){
+            _this.message = 'haha, you are clever！';
+          }else{
+            _this.message = '请输入正确的用户名和密码';
+          }
+          _this.showPositionValue = true;
         })
         .catch(function(error){
           console.log(error);
-        })
+        });
+        console.log(this.$route)
+
+        // this.$router.push('/register');
       },
       focus: function (e) {
         $(e.target).parent().addClass('isFocus');
