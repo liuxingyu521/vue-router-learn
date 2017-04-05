@@ -5,12 +5,12 @@
       <div class="form-item">
         <i class="iconfont icon-yonghuming"></i> 
         <input type="text" class="input-username" placeholder="请输入账户名" v-model="username"  @focus="focus" @blur="blur">
-        <span class="err-tip" v-if="nameIsEmpty">请输入用户名.</span>
+        <span class="err-tip" v-if="nameIsEmpty">请输入用户名</span>
       </div>
       <div class="form-item">
         <i class="iconfont icon-mima"></i>
         <input type="password" class="input-password" placeholder="请输入密码" v-model="password"  @focus="focus" @blur="blur">
-        <span class="err-tip" v-if="pwdIsEmpty">请输入密码.</span>
+        <span class="err-tip" v-if="pwdIsEmpty">请输入密码</span>
       </div>
       <div class="form-item submit">
         <button class="login" @click="login">确认登录</button>
@@ -18,8 +18,7 @@
         <router-link to="/register" >没有账号？点击注册</router-link>
       </div>
     </form>
-    <toast v-model="showPositionValue" type="text" :time="1200" is-show-mask width="20em">{{ message }}</toast>
-    <!-- <toast v-model="showPositionValue" type="text" width="20em">{{$t('show me code')}}</toast> -->
+    <toast v-model="showPositionValue" type="text" :time="1200" is-show-mask >{{ toastMessage }}</toast>
   </div>
 </template>
 
@@ -36,7 +35,7 @@
         nameIsEmpty: false,
         pwdIsEmpty: false,
         showPositionValue: false,
-        message: ''
+        toastMessage: ''
       }
     },
     components:{
@@ -56,23 +55,23 @@
 
         // 登录处理
         var _this = this;
-        axios.post('/users',{
+        axios.post('/users/login',{
           username: this.username,
           password: this.password
         })
-        .then(function(res){
-          console.log((typeof res.data));
-          if(res.data == '1'){
-            _this.message = 'haha, you are clever！';
+        .then(function(response){
+          console.log(response);
+          if(response.data.stateCode == 0){
+            _this.$router.push('/user/' + response.data.userId + '/flow');
           }else{
-            _this.message = '请输入正确的用户名和密码';
+            _this.toastMessage = response.data.stateDisc;
+            _this.showPositionValue = true;
           }
-          _this.showPositionValue = true;
         })
         .catch(function(error){
           console.log(error);
         });
-        console.log(this.$route)
+        // console.log(this.$route)
 
         // this.$router.push('/register');
       },

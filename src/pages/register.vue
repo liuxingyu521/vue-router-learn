@@ -5,17 +5,17 @@
       <div class="form-item">
         <i class="iconfont icon-yonghuming"></i> 
         <input type="text" class="input-username" placeholder="请输入账户名" v-model="username" @focus="focus" @blur="blur">
-        <span class="err-tip" v-if="nameIsEmpty">用户名不能为空.</span>
+        <span class="err-tip" v-if="nameIsEmpty">用户名不能为空</span>
       </div>
       <div class="form-item">
         <i class="iconfont icon-mima"></i>
         <input type="password" class="input-password" placeholder="请输入密码" v-model="password" @focus="focus" @blur="blur">
-        <span class="err-tip" v-if="pwdIsEmpty">密码不能为空.</span>
+        <span class="err-tip" v-if="pwdIsEmpty">密码不能为空</span>
       </div>
       <div class="form-item">
         <i class="iconfont icon-mima"></i>
         <input type="password" class="input-password" placeholder="请再次输入密码" v-model="password2" @focus="focus" @blur="blur">
-        <span class="err-tip" v-if="errTip">密码输入不一致，请重试.</span>
+        <span class="err-tip" v-if="errTip">密码输入不一致，请重试</span>
       </div>
       <div class="form-item submit">
         <button class="register" @click="register">立即注册</button>
@@ -27,6 +27,8 @@
 
 <script>
   import $ from 'jquery';
+  import axios from 'axios';
+
   export default {
     data: function(){
       return {
@@ -53,11 +55,22 @@
         }else{
           this.errTip = (!this.password2 && this.password) ? true : false;
         }
-
         if(!this.username || !this.password || !this.password2 || (this.password !== this.password2)){
           return;
         }
-        this.$router.push('/login');
+
+        axios.post('/users/register',{
+          username: this.username,
+          password: this.password
+        })
+        .then(function(res){
+
+        })
+        .catch(function(err){
+          console.log(err);
+        })
+
+        // this.$router.push('/login');
       },
       focus: function (e) {
         $(e.target).parent().addClass('isFocus');
@@ -91,7 +104,7 @@
     position: absolute;
     top: 100%;
     right: 0;
-    font-size: .8rem;
+    font-size: .7rem;
     color: red; 
   }
 </style>

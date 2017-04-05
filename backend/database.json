@@ -5,6 +5,10 @@
     "Richard": {
       "password": "000000",
       "total": "222222"
+    },
+    "sss": {
+      "password": "sss",
+      "total": "100000"
     }
   }
 }
