@@ -22,12 +22,14 @@
         <button @click="login">返回登录</button>
       </div>
     </form>
+    <toast v-model="showPositionValue" type="text" :time="1200" is-show-mask >{{ toastMessage }}</toast>
   </div>
 </template>
 
 <script>
   import $ from 'jquery';
   import axios from 'axios';
+  import Toast from '../components/toast.vue'
 
   export default {
     data: function(){
@@ -37,8 +39,13 @@
         password2: '',
         errTip: false,
         nameIsEmpty: false,
-        pwdIsEmpty: false
+        pwdIsEmpty: false,
+        showPositionValue: false,
+        toastMessage: ''
       }
+    },
+    components: {
+      Toast: Toast
     },
     methods: {
       login: function(e){
@@ -59,12 +66,19 @@
           return;
         }
 
+        var _this = this;
         axios.post('/users/register',{
-          username: this.username,
-          password: this.password
+          username: _this.username,
+          password: _this.password
         })
-        .then(function(res){
+        .then(function(response){
+          if(response.data.stateCode == 0){
 
+          }
+          else{
+            _this.toastMessage = response.data.stateDisc;
+            _this.showPositionValue = true;
+          }
         })
         .catch(function(err){
           console.log(err);

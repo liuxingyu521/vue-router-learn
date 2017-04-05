@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
+var fs = require('fs'); // 用fs模块将数据写入数据库json文件
 
 var userDatabase = require('./database.json');
 
@@ -43,7 +44,16 @@ app.post('/users/:page', function(req, res){
 
   // 对注册页的请求做处理
   if(req.params.page == 'register'){
-    
+    if(userIsExist){
+      resObject.stateCode = 102;
+      resObject.stateDisc = '用户已存在';
+      res.json(resObject);
+    }
+
+    var newUser = {};
+    newUser[username] = {
+      password: password
+    }
   }
 
 

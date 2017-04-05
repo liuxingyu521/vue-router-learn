@@ -56,8 +56,8 @@
         // 登录处理
         var _this = this;
         axios.post('/users/login',{
-          username: this.username,
-          password: this.password
+          username: _this.username,
+          password: _this.password
         })
         .then(function(response){
           console.log(response);
