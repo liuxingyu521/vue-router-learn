@@ -37,7 +37,7 @@ module.exports = {
         host: '0.0.0.0',
         port: '8888',
         proxy: {
-          '/users': {
+          '/users/*': {
             'target': 'http://localhost:8000'
           }
         }

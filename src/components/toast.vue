@@ -86,9 +86,7 @@ export default {
 
 <style lang="less">
 @import '../assets/css/transition.less';
-@import '../assets/css/weui/widget/weui_tips/weui_mask';
 @import '../assets/css/weui/icon/weui_icon_font';
-@import '../assets/css/weui/widget/weui_tips/weui_toast';
 
 .weui-toast {
   transform: translateX(-50%);

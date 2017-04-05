@@ -1,5 +1,5 @@
 export default [
-    { path: '/', component: require('./pages/login.vue'), redirect: '/login' },
+    { path: '/', redirect: '/login' },
     {
       path: '/user/:id', component: require('./pages/userMain.vue'),
       children: [
