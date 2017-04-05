@@ -5,10 +5,12 @@
       <div class="form-item">
         <i class="iconfont icon-yonghuming"></i> 
         <input type="text" class="input-username" placeholder="请输入账户名" v-model="username"  @focus="focus" @blur="blur">
+        <span class="err-tip" v-if="nameIsEmpty">请输入用户名.</span>
       </div>
       <div class="form-item">
         <i class="iconfont icon-mima"></i>
         <input type="password" class="input-password" placeholder="请输入密码" v-model="password"  @focus="focus" @blur="blur">
+        <span class="err-tip" v-if="pwdIsEmpty">请输入密码.</span>
       </div>
       <div class="form-item submit">
         <button class="login" @click="login">确认登录</button>
@@ -16,7 +18,7 @@
         <router-link to="/register" >没有账号？点击注册</router-link>
       </div>
     </form>
-    <toast v-model="showPositionValue" type="text" :time="1200" is-show-mask width="20em" :position="position">{{ message }}</toast>
+    <toast v-model="showPositionValue" type="text" :time="1200" is-show-mask width="20em">{{ message }}</toast>
     <!-- <toast v-model="showPositionValue" type="text" width="20em">{{$t('show me code')}}</toast> -->
   </div>
 </template>
@@ -31,9 +33,10 @@
       return {
         username: '',
         password: '',
+        nameIsEmpty: false,
+        pwdIsEmpty: false,
         showPositionValue: false,
-        message: '',
-        position: ''
+        message: ''
       }
     },
     components:{
@@ -43,14 +46,23 @@
       login: function(e){
         // 防止默认提交表单
         e.preventDefault();
+
+        // 表单为空，错误提示，不提交表单
+        this.nameIsEmpty = !this.username ? true : false;
+        this.pwdIsEmpty = !this.password ? true : false;
+        if(!this.username || !this.password){
+          return;
+        }
+
+        // 登录处理
         var _this = this;
         axios.post('/users',{
           username: this.username,
           password: this.password
         })
         .then(function(res){
-          console.log(res.data)
-          if(res.data == 1){
+          console.log((typeof res.data));
+          if(res.data == '1'){
             _this.message = 'haha, you are clever！';
           }else{
             _this.message = '请输入正确的用户名和密码';
@@ -71,6 +83,13 @@
       blur: function (e) {
         $(e.target).parent().removeClass('isFocus');
         $(e.target).prev().removeClass('focus');
+
+        // (非空判断加tip标志)
+        if($(e.target).hasClass('input-username')){
+          this.nameIsEmpty = !this.username ? true : false;
+        }else if($(e.target).hasClass('input-password')){
+          this.pwdIsEmpty = !this.password ? true : false;
+        }
       }
     }
   }
