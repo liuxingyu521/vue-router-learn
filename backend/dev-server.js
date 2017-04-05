@@ -49,11 +49,20 @@ app.post('/users/:page', function(req, res){
       resObject.stateDisc = '用户已存在';
       res.json(resObject);
     }
+    else{
+      var newUser = {};
+      newUser[username] = {
+        password: password,
+        total: '2000000'
+      }
+      Object.assign(userDatabase.users, newUser);
+      console.log(userDatabase);
 
-    var newUser = {};
-    newUser[username] = {
-      password: password
+      fs.writeFile('./database.json', JSON.stringify(userDatabase, null, 2), function(err){
+        // console.log(err);
+      })
     }
+
   }
 
 
