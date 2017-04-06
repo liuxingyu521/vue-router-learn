@@ -73,7 +73,11 @@
         })
         .then(function(response){
           if(response.data.stateCode == 0){
-
+            _this.$emit('toast',{
+              toastMessage: '注册成功，请登录',
+              isToast: true
+            })
+            _this.$router.push({ path: '/login'});
           }
           else{
             _this.toastMessage = response.data.stateDisc;

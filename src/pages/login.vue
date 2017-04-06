@@ -178,6 +178,9 @@
     background: #ff8737;
     color: white;
   }
+  /*.form-item button.login:focus, .form-item button.register:focus {
+    outline: none;
+  }*/
   /* 字体图标的设置 */
   .icon-yonghuming:before, .icon-mima:before, .icon-mima2:before { 
     position: absolute;

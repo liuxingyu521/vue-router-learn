@@ -1,14 +1,16 @@
 <template>
   <div class="app">
     <transition :name="transitionName">
-      <router-view class="child-view" v-on:loading="loading"></router-view>
+      <router-view class="child-view" v-on:loading="loading" v-on:toast="toast"></router-view>
     </transition>
     <loading v-model="isLoading" :text="loadingText"></loading>
+    <toast v-model="showPositionValue" type="text" :time="1500" isShowMask width="auto" position="bottom">{{ toastMessage }}</toast>
   </div>
 </template>
 
 <script>
   import Loading from './components/loading.vue';
+  import Toast from './components/toast.vue';
 
   export default {
     data: function() {
@@ -16,17 +18,26 @@
         title: '账单管家',
         transitionName: 'fade',
         isLoading: false,
-        loadingText: '登录成功，初始化数据中...'
+        loadingText: '',
+        showPositionValue: false,
+        toastMessage: ''
       }
     },
     components: {
-      Loading: Loading
+      Loading: Loading,
+      Toast: Toast
     },
     methods: {
+      // 遮罩层事件
       loading: function(data){
         console.log(data);
         this.loadingText = data.loadingText;
         this.isLoading = data.isLoading;
+      },
+      // 提示文案事件
+      toast: function(data){
+        this.toastMessage = data.toastMessage;
+        this.showPositionValue = data.isToast;
       }
     },
     watch: {
@@ -36,9 +47,13 @@
         }
         else if((from.name == 'login') && (to.name == 'register')){
           this.transitionName = 'slide-left';
+          console.log(from);
         }
         else{
           this.transitionName = 'fade';
+        }
+        if((from.name == 'register') && (to.name == 'login')){
+          console.log(from);
         }
       }
     }
