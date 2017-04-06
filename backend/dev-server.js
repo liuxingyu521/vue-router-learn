@@ -11,7 +11,8 @@ app.use(bodyParser.json())
 app.post('/users/:page', function(req, res){
   // 每请求一次，查询一次数据库
   var userDatabase = require('./database.json');
-  // console.log(userDatabase); 待解决..控制台输出了对象名
+  console.log(userDatabase);
+  // console.log(userDatabase); 待解决..(已解决)控制台输出了对象名
   //    [ { username: 'Richard', password: '000000' },
   //    { username: 'sss', password: 'sss' },
   //    UserConfig { username: '1', password: '1' } ]
@@ -30,7 +31,6 @@ app.post('/users/:page', function(req, res){
 
   var userIsExist = userDatabase.users.some(function(ele, index, arr){
     if(ele.username == username){
-      console.log(arr[index]);
       pwdTmp = ele.password;
       return true;
     }
@@ -67,6 +67,9 @@ app.post('/users/:page', function(req, res){
     // 注册成功
     else{
       var newUser = new User(username, password);
+
+      // fix 控制台输出对象名的问题
+      newUser = Object.assign({}, newUser);
       
       userDatabase.users.push(newUser);
       // console.log(JSON.stringify(userDatabase, null, 2));
