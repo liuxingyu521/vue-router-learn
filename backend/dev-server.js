@@ -1,15 +1,21 @@
 var express = require('express');
 var path = require('path');
-var bodyParser = require('body-parser');
+var bodyParser = require('body-parser'); // 解析post请求body内容
 var fs = require('fs'); // 用fs模块将数据写入数据库json文件
-
-var userDatabase = require('./database.json');
+var User = require('./userConfig.js');
 
 var app = express();
 
 app.use(bodyParser.json())
 
 app.post('/users/:page', function(req, res){
+  // 每请求一次，查询一次数据库
+  var userDatabase = require('./database.json');
+  // console.log(userDatabase); 待解决..控制台输出了对象名
+  //    [ { username: 'Richard', password: '000000' },
+  //    { username: 'sss', password: 'sss' },
+  //    UserConfig { username: '1', password: '1' } ]
+
   var username = req.body.username;
   var password = req.body.password;
 
@@ -19,9 +25,19 @@ app.post('/users/:page', function(req, res){
     userId: ''
   };
   
+  // 临时存密码，用于校验
+  var pwdTmp = '';
 
-  var userIsExist = Object.keys(userDatabase.users).indexOf(username) < 0 ? false : true;
-  console.log(req.params);
+  var userIsExist = userDatabase.users.some(function(ele, index, arr){
+    if(ele.username == username){
+      console.log(arr[index]);
+      pwdTmp = ele.password;
+      return true;
+    }
+    else{
+      return false;
+    }
+  });
   
   // 对登录页的请求做处理
   if(req.params.page == 'login'){
@@ -29,7 +45,7 @@ app.post('/users/:page', function(req, res){
       resObject.stateCode = 101;
       resObject.stateDisc = '用户不存在';
     }
-    else if(password !== userDatabase.users[username].password.toString()){
+    else if(password !== pwdTmp){
       resObject.stateCode = 201;
       resObject.stateDisc = '密码不正确';
     }
@@ -38,7 +54,6 @@ app.post('/users/:page', function(req, res){
       resObject.stateDisc = '登录成功';
       resObject.userId = username;
     }
-    console.log(resObject);
     res.json(resObject);
   }
 
@@ -49,30 +64,28 @@ app.post('/users/:page', function(req, res){
       resObject.stateDisc = '用户已存在';
       res.json(resObject);
     }
+    // 注册成功
     else{
-      var newUser = {};
-      newUser[username] = {
-        password: password,
-        total: '2000000'
-      }
-      Object.assign(userDatabase.users, newUser);
-      console.log(userDatabase);
+      var newUser = new User(username, password);
+      
+      userDatabase.users.push(newUser);
+      // console.log(JSON.stringify(userDatabase, null, 2));
 
+      // 写入数据库
       fs.writeFile('./database.json', JSON.stringify(userDatabase, null, 2), function(err){
         // console.log(err);
-      })
+      });
+
+      resObject.stateCode = 0;
+      resObject.stateDisc = '注册成功';
+      resObject.userId = username;
+
+      res.json(resObject);
     }
 
   }
 
 
 })
-
-// app.post('/users/register', function(req, res){
-//   var username = req.body.username;
-//   var password = req.body.password;
-
-
-// })
 
 app.listen(8000);

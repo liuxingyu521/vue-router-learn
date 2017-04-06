@@ -1,22 +1,22 @@
 {
   "name": "userDatabase",
   "version": "v0.0.1",
-  "users": {
-    "Richard": {
-      "password": "000000",
-      "total": "222222"
+  "users": [
+    {
+      "username": "Richard",
+      "password": "000000"
     },
-    "sss": {
-      "password": "sss",
-      "total": "100000"
+    {
+      "username": "sss",
+      "password": "sss"
     },
-    "abcd": {
-      "password": "sss",
-      "total": "2000000"
+    {
+      "username": "1",
+      "password": "1"
     },
-    "abcdefg": {
-      "password": "sss",
-      "total": "2000000"
+    {
+      "username": "2",
+      "password": "2"
     }
-  }
+  ]
 }
