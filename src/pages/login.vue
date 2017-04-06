@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="loginPage">
     <header>账单管家</header>
     <form id="loginForm" >
       <div class="form-item">
@@ -96,14 +96,14 @@
 
 <style>
   @import '../assets/css/iconfont.css';
-  .page {
+  .loginPage, .registerPage {
     background-image: url('../assets/img/loginBg.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 2rem;
     padding-bottom: 11rem;
   }
-  .page header {
+  .loginPage header, .registerPage header {
     height: 10rem;
     text-align: center;
     line-height: 10rem;
@@ -177,6 +177,13 @@
   .form-item button.login, .form-item button.register {
     background: #ff8737;
     color: white;
+  }
+  .form-item .err-tip {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    font-size: .7rem;
+    color: red; 
   }
   /*.form-item button.login:focus, .form-item button.register:focus {
     outline: none;

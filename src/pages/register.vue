@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="registerPage">
     <header>账单管家</header>
     <form id="loginForm">
       <div class="form-item">
@@ -117,15 +117,6 @@
   }
 </script>
 
-<style>
-  .form-item .err-tip {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    font-size: .7rem;
-    color: red; 
-  }
-</style>
 
 
 

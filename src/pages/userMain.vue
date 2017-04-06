@@ -1,19 +1,32 @@
 <template>
-  <div class="container">
-    welcome to user space!
+  <div class="userPage">
+    <z-head :showUser="showUser">账单管家</z-head>
   </div>
 </template>
 
 <script>
+  import ZHead from '../layout/Head.vue';
+
   export default {
     data: function(){
-      return {};
+      return {
+        showUser: true
+      };
+    },
+    components: {
+      ZHead: ZHead
     },
     created: function(){
-      this.$emit('loading', {
+      var _this = this;
+      _this.$emit('loading', {
         isLoading: true,
         loadingText: '正在初始化数据..'
       });
+
+
+      setTimeout(function(){
+        _this.$emit('loading', { isLoading: false });
+      }, 2000);
     }
   }
 </script>
