@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div id="app">
     <transition :name="transitionName">
       <router-view class="child-view" v-on:loading="loading" v-on:toast="toast"></router-view>
     </transition>
@@ -61,9 +61,11 @@
 
 <style lang='less'>
   @import './assets/css/reset.less';
-  .app{
+  #app{
     width: 100%;
     position: relative;
+    overflow: hidden;
+    background-color: #eee;
   }
   .fade-enter-active, .fade-leave-active {
     transition: opacity .3s ease;
