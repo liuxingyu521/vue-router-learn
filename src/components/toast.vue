@@ -35,18 +35,18 @@ export default {
     text: String,
     position: String
   },
-  data () {
+  data: function() {
     return {
       show: false
     }
   },
-  created () {
+  created: function() {
     if (this.value) {
       this.show = true
     }
   },
   computed: {
-    currentTransition () {
+    currentTransition: function() {
       if (this.transition) {
         return this.transition
       }
@@ -58,7 +58,7 @@ export default {
       }
       return 'vux-fade'
     },
-    toastClass () {
+    toastClass: function() {
       return {
         'weui-toast_forbidden': this.type === 'warn',
         'weui-toast_cancel': this.type === 'cancel',
@@ -69,26 +69,27 @@ export default {
         'vux-toast-middle': this.position === 'middle'
       }
     },
-    style () {
+    style: function() {
       if (this.type === 'text' && this.width === 'auto') {
         return { padding: '10px' }
       }
     }
   },
   watch: {
-    show (val) {
+    show: function(val) {
       if (val) {
-        this.$emit('input', true)
-        this.$emit('on-show')
-        clearTimeout(this.timeout)
-        this.timeout = setTimeout(() => {
-          this.show = false
-          this.$emit('input', false)
-          this.$emit('on-hide')
-        }, this.time)
+        var _this = this;
+        _this.$emit('input', true)
+        _this.$emit('on-show')
+        clearTimeout(_this.timeout)
+        this.timeout = setTimeout(function(){
+          _this.show = false
+          _this.$emit('input', false)
+          _this.$emit('on-hide')
+        }, _this.time)
       }
     },
-    value (val) {
+    value: function(val) {
       this.show = val
     }
   }

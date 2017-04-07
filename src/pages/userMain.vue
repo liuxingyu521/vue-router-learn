@@ -1,6 +1,8 @@
 <template>
   <div class="userPage">
     <z-head :showUser="showUser">账单管家</z-head>
+    <router-view></router-view>
+    
   </div>
 </template>
 

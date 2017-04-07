@@ -18,19 +18,19 @@ export default {
     text: String,
     position: String
   },
-  created () {
+  created: function() {
     this.show = this.value
   },
-  data () {
+  data: function() {
     return {
       show: false
     }
   },
   watch: {
-    value (val) {
+    value: function(val) {
       this.show = val
     },
-    show (val) {
+    show: function(val) {
       this.$emit('input', val)
     }
   }
