@@ -10,7 +10,14 @@
     <meta name="x5-page-mode" content="app">
     <meta name="applicable-device" content="mobile">
     <title>账单管家</title>
-    
+    <script type="text/javascript">
+        function changeSize(e){
+            var app = document.getElementById('app');
+            app.style.height = window.screen.height + 'px';
+        }
+        window.addEventListener('DOMContentLoaded', changeSize);
+        // window.addEventListener('resize', changeSize);
+    </script>
 </head>
 
 <body>
