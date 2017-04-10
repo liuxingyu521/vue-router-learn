@@ -4,31 +4,24 @@
   "users": [
     {
       "username": "Richard",
-      "password": "000000"
+      "password": "000000",
+      "bill": {
+        "total": "300000"
+      }
     },
     {
       "username": "sss",
-      "password": "sss"
+      "password": "sss",
+      "bill": {
+        "total": "200000"
+      }
     },
     {
       "username": "1",
-      "password": "1"
-    },
-    {
-      "username": "2",
-      "password": "2"
-    },
-    {
-      "username": "5",
-      "password": "5"
-    },
-    {
-      "username": "7",
-      "password": "7"
-    },
-    {
-      "username": "8",
-      "password": "8"
+      "password": "1",
+      "bill": {
+        "total": "0"
+      }
     }
   ]
 }
