@@ -64,6 +64,7 @@
     position: absolute;
     top: .5rem;
     left: 1rem;
+    width: 30%;
     border: 1px solid #aaa;
   }
   .container .display{
@@ -74,7 +75,20 @@
     line-height: 3.5rem;
   }
   .container .calendar span.static{
-    text-align: bottom;
     font-family: "comic sans MS";
+    font-size: 2rem;
+    text-align: center;
+    height: 2.6rem;
+  }
+  .container .calendar span.c-month{
+    font-size: 1.7rem;
+    text-indent: 0.8rem;
+    height: 2.8rem;
+  }
+  .container .calendar span.c-day{
+    font-size: 3rem;
+    text-indent: 1.6rem;
+    height: 4rem;
+    text-decoration: underline;
   }
 </style>
