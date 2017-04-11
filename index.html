@@ -13,7 +13,10 @@
     <script type="text/javascript">
         function changeSize(e){
             var app = document.getElementById('app');
-            app.style.height = window.screen.height + 'px';
+            // // 微信内置浏览器有顶部title，视口需单独处理
+            // var ua = window.navigator.userAgent.toLowerCase();
+            // if(ua.match(/MicroMessenger/i))
+            app.style.height = window.document.documentElement.clientHeight + 'px';
         }
         window.addEventListener('DOMContentLoaded', changeSize);
         // window.addEventListener('resize', changeSize);
