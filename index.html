@@ -4,22 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="applicable-device" content="mobile">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="full-screen" content="yes">
     <meta name="browsermode" content="application">
     <meta name="x5-page-mode" content="app">
-    <meta name="applicable-device" content="mobile">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="x5-fullscreen" content="true">
     <title>账单管家</title>
     <script type="text/javascript">
         function changeSize(e){
             var app = document.getElementById('app');
-            // // 微信内置浏览器有顶部title，视口需单独处理
-            // var ua = window.navigator.userAgent.toLowerCase();
-            // if(ua.match(/MicroMessenger/i))
             app.style.height = window.document.documentElement.clientHeight + 'px';
         }
         window.addEventListener('DOMContentLoaded', changeSize);
-        // window.addEventListener('resize', changeSize);
+        window.addEventListener('resize', changeSize);
     </script>
 </head>
 
