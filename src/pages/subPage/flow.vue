@@ -12,7 +12,17 @@
             <option value="year" selected="selected">年流水</option>
             <option value="month">月流水</option>
           </select>
-          <div class="flow-date">{{ flowType }}</div>
+          <div class="flow-date">{{ flowDate | formatFlowDate(flowType) }}</div>
+        </div>
+        <div class="display-content">
+          <div class="expend-wrap">
+            <span class="text">本年支出:</span>
+            <span class="expend"><b>{{ expend }}</b>￥</span>
+          </div>
+          <div class="income-wrap">
+            <span class="text">本年收入:</span>
+            <span class="income"><b>{{ income }}</b>￥</span>
+          </div>
         </div>
       </div>
     </div>
@@ -30,13 +40,37 @@
       }
     },
     data: function(){
+      var cur_date = new Date();
       return {
         date: {
-          c_year: '2017',
-          c_month: '4',
-          c_day: '06'
+          c_year: cur_date.getFullYear(),
+          c_month: cur_date.getMonth()+1,
+          c_day: cur_date.getDate()
         },
-        flowType: 'year'
+        flowType: 'year',
+        flowDate: cur_date.getFullYear(),
+        expend: '20,000',
+        income: '1,120,000'
+      }
+    },
+    filters: {
+      formatFlowDate: function(text, type){
+        if(type == 'year'){
+          return text+'年';
+        }
+        else{
+          return text;
+        }
+      }
+    },
+    watch: {
+      flowType: function(val){
+        if(val == 'year'){
+          this.flowDate = this.date.c_year;
+        }
+        else{
+          this.flowDate = this.date.c_year + '-' + this.date.c_month;
+        }
       }
     }
     // created: function(){
@@ -103,14 +137,14 @@
   }
   .container .calendar span.c-day{
     font-size: 3.5rem;
-    text-indent: 2rem;
+    text-indent: 2.5rem;
     height: 4rem;
   }
   .container .calendar span.c-day b:after{
     content: '';
     position: absolute;
     bottom: 0.5rem;
-    left: 2.5rem;
+    left: 3rem;
     width: 3.5rem;
     border-bottom: 2px solid #505050;
   }
@@ -138,5 +172,37 @@
   }
   .container .display .display-title select.flow-type:focus{
     outline: none;
+  }
+  .container .display .display-title .flow-date{
+    width: 6rem;
+    padding: 0 .5rem;
+    font-size: 1.2rem;
+    line-height: 2.3rem;
+    box-sizing: border-box;
+    box-shadow: inset 0px 0px 6px 4px rgba(226, 110, 27, 0.2);
+    border: 1px dashed #e26e1b;
+  }
+  .container .display .display-content [class$='wrap']{
+    height: 4rem;
+    padding-right: 1rem;
+    line-height: 4rem;
+    text-indent: 1.2rem;
+    font-family: "Microsoft YaHei";
+    font-size: 1.1rem;
+    color: #636363;
+  }
+  .container .display .display-content span.expend,
+  .container .display .display-content span.income{
+    font-size: 1.3rem;
+    display: inline-block;
+    width: 6.8rem;
+    text-align: right;
+    text-indent: 0;
+  }
+  .container .display .display-content span.expend b{
+    color: red;
+  }
+  .container .display .display-content span.income b{
+    color: #11bb11;
   }
 </style>
