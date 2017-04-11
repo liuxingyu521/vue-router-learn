@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="font-size: 16px">
+<html lang="en" >
 
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,9 @@
     <title>账单管家</title>
     <script type="text/javascript">
         function changeSize(e){
+            var docEl = window.document.documentElement;
             var app = document.getElementById('app');
+            docEl.style.fontSize = 16 * (docEl.clientWidth / 375) + 'px';
             app.style.height = window.document.documentElement.clientHeight + 'px';
         }
         window.addEventListener('DOMContentLoaded', changeSize);
