@@ -26,6 +26,22 @@
         </div>
       </div>
     </div>
+    <div class="flowDisplay">
+      <timeline>
+        <timeline-item>
+            <p class="recent">收入：3000￥</p>
+            <p class="recent">支出：3211￥</p>
+        </timeline-item>
+        <timeline-item>
+            <h4> 申通快递员 广东广州 收件员 xxx 已揽件</h4>
+            <p>2016-04-16 10:23:00</p>
+        </timeline-item>
+        <timeline-item>
+            <h4> 商家正在通知快递公司揽件</h4>
+            <p>2016-04-15 9:00:00</p>
+        </timeline-item>
+      </timeline>
+    </div>
     <date-selector v-model="showDate"
     title="请选择日期"
     @on-confirm="setFlowDate"
@@ -48,6 +64,8 @@
 
 <script>
   import DateSelector from '../../components/confirm.vue';
+  import Timeline from '../../components/timeline.vue';
+  import TimelineItem from '../../components/timeline-item.vue';
 
   export default {
     props: {
@@ -74,7 +92,9 @@
       }
     },
     components: {
-      DateSelector: DateSelector
+      DateSelector: DateSelector,
+      Timeline: Timeline,
+      TimelineItem: TimelineItem
     },
     filters: {
       formatFlowDate: function(text, type){
