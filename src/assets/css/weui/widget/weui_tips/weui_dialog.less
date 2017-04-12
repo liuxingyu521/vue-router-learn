@@ -7,7 +7,7 @@
     max-width: 300px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -70%);
 
     background-color: @weuiDialogBackgroundColor;
     text-align: center;
@@ -15,14 +15,19 @@
     overflow: hidden;
 }
 .weui-dialog__hd {
+    position: relative;
     padding: 1.3em @weuiDialogGapWidth .5em;
+    &:after {
+        content: " ";
+        .setBottomLine(@weuiDialogLineColor);
+    }
 }
 .weui-dialog__title {
     font-weight: 400;
     font-size: 18px;
 }
 .weui-dialog__bd {
-    padding: 0 @weuiDialogGapWidth .8em;
+    padding: 1.5em @weuiDialogGapWidth 1.5em;
     min-height: 40px;
     font-size: 15px;
     line-height: 1.3;

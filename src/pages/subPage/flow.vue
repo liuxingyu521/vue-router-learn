@@ -9,28 +9,45 @@
       <div class="display">
         <div class="display-title">
           <select class="flow-type" v-model="flowType">
-            <option value="year" selected="selected">年流水</option>
-            <option value="month">月流水</option>
+            <option value="年" selected="selected">年流水</option>
+            <option value="月">月流水</option>
           </select>
-          <div class="flow-date">{{ flowDate | formatFlowDate(flowType) }}</div>
+          <div class="flow-date" @click="showDate=true">{{ flowDate | formatFlowDate(flowType) }}</div>
         </div>
         <div class="display-content">
           <div class="expend-wrap">
-            <span class="text">本年支出:</span>
+            <span class="text">本{{ flowType }}支出:</span>
             <span class="expend"><b>{{ expend }}</b>￥</span>
           </div>
           <div class="income-wrap">
-            <span class="text">本年收入:</span>
+            <span class="text">本{{ flowType }}收入:</span>
             <span class="income"><b>{{ income }}</b>￥</span>
           </div>
         </div>
       </div>
     </div>
+    <date-selector v-model="showDate"
+    title="请选择日期"
+    @on-confirm="setFlowDate"
+    >
+      <div class="year-month-wrap">
+        <div class="year-selector">
+          <span class="sub" @click="flowYear = (flowYear == 1990) ? 2050 : flowYear-1">-</span>
+          <p v-html="flowYear+'年'"></p>
+          <span class="add" @click="flowYear = (flowYear == 2050) ? 1990 : flowYear+1">+</span>
+        </div>
+        <div class="month-selector" v-show="flowType=='年' ? false : true">
+          <span class="sub" @click="flowMonth = (flowMonth == 1) ? 12 : flowMonth-1">-</span>
+          <p v-html="flowMonth+'月'"></p>
+          <span class="add" @click="flowMonth = (flowMonth == 12) ? 1 : flowMonth+1">+</span>
+        </div>
+      </div>
+    </date-selector>
   </div>
 </template>
 
 <script>
-  import axios from 'axios';
+  import DateSelector from '../../components/confirm.vue';
 
   export default {
     props: {
@@ -47,15 +64,21 @@
           c_month: cur_date.getMonth()+1,
           c_day: cur_date.getDate()
         },
-        flowType: 'year',
+        flowType: '年',
         flowDate: cur_date.getFullYear(),
-        expend: '20,000',
-        income: '1,120,000'
+        flowYear: cur_date.getFullYear(),
+        flowMonth: cur_date.getMonth()+1,
+        expend: '122,200',
+        income: '1,121,200',
+        showDate: false
       }
+    },
+    components: {
+      DateSelector: DateSelector
     },
     filters: {
       formatFlowDate: function(text, type){
-        if(type == 'year'){
+        if(type == '年'){
           return text+'年';
         }
         else{
@@ -65,33 +88,29 @@
     },
     watch: {
       flowType: function(val){
-        if(val == 'year'){
-          this.flowDate = this.date.c_year;
+        if(val == '年'){
+          this.flowDate = this.flowYear = this.date.c_year;
         }
         else{
           this.flowDate = this.date.c_year + '-' + this.date.c_month;
+          this.flowMonth = this.date.c_month;
+        }
+      },
+      flowDate: function(val){
+
+      }
+    },
+    methods: {
+      setFlowDate: function(){
+        if(this.flowType == '年'){
+          this.flowDate = this.flowYear;
+        }
+        else{
+          this.flowDate = this.flowYear + '-' + this.flowMonth;
         }
       }
     }
-    // created: function(){
-    //   var _this = this;
-    //   axios.post('/users/id/bill')
-    //     .then(function(response){
-    //       if(response.data.stateCode == '1'){
-    //         _this.$emit('sessionFail',{
-    //           isToast: true,
-    //           toastMessage: '会话失败，请重新登录'
-    //         })
-    //         _this.$router.push('/login');
-    //       }
-    //       else{
-    //         console.log(response.data.userBill);
-    //       }
-    //     })
-    //     .catch(function(error){
-    //       console.log(error);
-    //     })
-    // }
+    
   }
 </script>
 
@@ -102,7 +121,7 @@
   }
   .container .totalDisplay{
     height: 12rem;
-    border-bottom: 1px solid blue;
+    border-bottom: 1px solid #888;
     background-color: #fbf0d3;
   }
   .container .calendar{
@@ -184,7 +203,7 @@
   }
   .container .display .display-content [class$='wrap']{
     height: 4rem;
-    padding-right: 1rem;
+    padding-right: .6rem;
     line-height: 4rem;
     text-indent: 1.2rem;
     font-family: "Microsoft YaHei";
@@ -195,7 +214,7 @@
   .container .display .display-content span.income{
     font-size: 1.3rem;
     display: inline-block;
-    width: 6.8rem;
+    width: 7rem;
     text-align: right;
     text-indent: 0;
   }
@@ -204,5 +223,28 @@
   }
   .container .display .display-content span.income b{
     color: #11bb11;
+  }
+  /* 日期选择窗 */
+  .container .year-month-wrap{
+    display: flex;
+  }
+  .container .year-month-wrap span{
+    font-size: 2rem;
+    display: inline-block;
+    width: 3.5rem;
+  }
+  .container .year-month-wrap .year-selector,
+  .container .year-month-wrap .month-selector{
+    flex: 1;
+  }
+  .container .year-month-wrap .year-selector p,
+  .container .year-month-wrap .month-selector p{
+    display: inline-block;
+    width: 8rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    font-size: 1.1rem;
+    color: black;
   }
 </style>
