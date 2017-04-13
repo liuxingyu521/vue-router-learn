@@ -40,7 +40,7 @@
     width: 100%;
     height: 4rem;
     line-height: 4rem;
-    background-color: rgba(162, 162, 162, 0.25);
+    background-color: rgb(214, 213, 213);
     border-top: 1px solid #ccc;
   }
   .footer .f-item{

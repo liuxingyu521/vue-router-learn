@@ -40,11 +40,24 @@
             <h4> 商家正在通知快递公司揽件</h4>
             <p>2016-04-15 9:00:00</p>
         </timeline-item>
+        <timeline-item>
+            <p class="recent">收入：3000￥</p>
+            <p class="recent">支出：3211￥</p>
+        </timeline-item>
+        <timeline-item>
+            <h4> 申通快递员 广东广州 收件员 xxx 已揽件</h4>
+            <p>2016-04-16 10:23:00</p>
+        </timeline-item>
+        <timeline-item>
+            <h4> 商家正在通知快递公司揽件</h4>
+            <p>2016-04-15 9:00:00</p>
+        </timeline-item>        
       </timeline>
     </div>
     <date-selector v-model="showDate"
     title="请选择日期"
     @on-confirm="setFlowDate"
+    @on-cancel="setFlowYearMonth"
     >
       <div class="year-month-wrap">
         <div class="year-selector">
@@ -114,6 +127,7 @@
         else{
           this.flowDate = this.date.c_year + '-' + this.date.c_month;
           this.flowMonth = this.date.c_month;
+          this.flowYear = this.date.c_year;
         }
       },
       flowDate: function(val){
@@ -127,6 +141,15 @@
         }
         else{
           this.flowDate = this.flowYear + '-' + this.flowMonth;
+        }
+      },
+      setFlowYearMonth: function(){
+        if(this.flowType == '年'){
+          this.flowYear = this.flowDate;
+        }
+        else{
+          this.flowYear =  Number(this.flowDate.split('-')[0]);
+          this.flowMonth = Number(this.flowDate.split('-')[1]);
         }
       }
     }
