@@ -32,7 +32,9 @@ export default {
 @import '../assets/css/variable.less';
 
 .vux-timeline {
-  padding: 1rem 1rem 1rem 1.5rem;
+  padding: 0rem 1rem 6rem 1.5rem;
+  height: 12rem;
+  overflow-y: auto;
 }
 
 .vux-timeline > ul > li {
@@ -60,7 +62,7 @@ export default {
 .vux-timeline-item-head-first {
   position:absolute;
   content:'';
-  z-index:99;
+  // z-index:99;
   border-radius:99px;
 }
 
@@ -68,20 +70,22 @@ export default {
   width: 2.7rem;
   height: 2.7rem;
   left: -1.3rem;
-  top: 0.7rem;
+  top: 0.6rem;
   text-align: center;
   line-height: 2.7rem;
   font-size: 1.5rem;
+  z-index: 1;
 }
 
 .vux-timeline-item-head-first {
   width: 2.7rem;
   height: 2.7rem;
   left: -1.3rem;
-  top: 0.7rem;
+  top: 0.6rem;
   text-align: center;
   line-height: 2.7rem;
   font-size: 1.5rem;
+  z-index: 1;
 }
 
 .vux-timeline-item-tail {

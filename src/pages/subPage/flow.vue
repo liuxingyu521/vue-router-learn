@@ -27,6 +27,12 @@
       </div>
     </div>
     <div class="flowDisplay">
+      <div class="lastFlow">
+        最新流水
+        <span class="lastFlowDate">3月20日</span>
+        <span class="lastFlowType">支:</span>
+        <span class="lastFlowMoney">33￥</span>
+      </div>
       <timeline>
         <timeline-item>
             <p class="recent">收入：3000￥</p>
@@ -167,7 +173,7 @@
     border-bottom: 1px solid #888;
     background-color: #fbf0d3;
   }
-  .container .calendar{
+  .totalDisplay .calendar{
     position: absolute;
     top: .7rem;
     left: .6rem;
@@ -178,31 +184,31 @@
     box-shadow: 1px 2px 1px 1px rgba(49, 45, 45, 0.52);
     background-color: white;
   }
-  .container .display{
+  .totalDisplay .display{
     padding-left: 40%;
   }
-  .container .calendar span{
+  .totalDisplay .calendar span{
     display: block;
     line-height: 3.5rem;
   }
-  .container .calendar span.static{
+  .totalDisplay .calendar span.static{
     font-family: "comic sans MS";
     font-size: 2.5rem;
     text-align: center;
     height: 2.8rem;
     color: #fd5757;
   }
-  .container .calendar span.c-month{
+  .totalDisplay .calendar span.c-month{
     font-size: 1.9rem;
     text-indent: 1rem;
     height: 3.2rem;
   }
-  .container .calendar span.c-day{
+  .totalDisplay .calendar span.c-day{
     font-size: 3.5rem;
     text-indent: 2.5rem;
     height: 4rem;
   }
-  .container .calendar span.c-day b:after{
+  .totalDisplay .calendar span.c-day b:after{
     content: '';
     position: absolute;
     bottom: 0.5rem;
@@ -210,16 +216,16 @@
     width: 3.5rem;
     border-bottom: 2px solid #505050;
   }
-  .container .display .display-title{
+  .totalDisplay .display .display-title{
     height: 2.5rem;
     padding: .8rem .3rem;
   }
-  .container .display .display-title [class^='flow']{
+  .totalDisplay .display .display-title [class^='flow']{
     display: inline-block;
     height: 2.5rem;
     line-height: 2.5rem;
   }
-  .container .display .display-title select.flow-type{
+  .totalDisplay .display .display-title select.flow-type{
     margin: 0 .5rem 0 1rem;
     padding: 0 1rem 0 .5rem;
     box-shadow: inset -2px -3px 2px 0px rgba(204, 204, 204, .8);
@@ -232,10 +238,10 @@
     -moz-appearance:none;
     -webkit-appearance:none;
   }
-  .container .display .display-title select.flow-type:focus{
+  .totalDisplay .display .display-title select.flow-type:focus{
     outline: none;
   }
-  .container .display .display-title .flow-date{
+  .totalDisplay .display .display-title .flow-date{
     width: 6rem;
     padding: 0 .5rem;
     font-size: 1.2rem;
@@ -244,7 +250,7 @@
     box-shadow: inset 0px 0px 6px 4px rgba(226, 110, 27, 0.2);
     border: 1px dashed #e26e1b;
   }
-  .container .display .display-content [class$='wrap']{
+  .totalDisplay .display .display-content [class$='wrap']{
     height: 4rem;
     padding-right: .6rem;
     line-height: 4rem;
@@ -253,18 +259,18 @@
     font-size: 1.1rem;
     color: #636363;
   }
-  .container .display .display-content span.expend,
-  .container .display .display-content span.income{
+  .totalDisplay .display .display-content span.expend,
+  .totalDisplay .display .display-content span.income{
     font-size: 1.3rem;
     display: inline-block;
     width: 7rem;
     text-align: right;
     text-indent: 0;
   }
-  .container .display .display-content span.expend b{
+  .totalDisplay .display .display-content span.expend b{
     color: red;
   }
-  .container .display .display-content span.income b{
+  .totalDisplay .display .display-content span.income b{
     color: #11bb11;
   }
   /* 日期选择窗 */
@@ -289,5 +295,38 @@
     text-align: center;
     font-size: 1.1rem;
     color: black;
+  }
+  .flowDisplay .lastFlow{
+    background: rgb(225, 245, 232);
+    height: 3.5rem;
+    position: relative;
+    margin: .5rem 1.5rem 0.5rem 3rem;
+    padding-left: 2rem;
+    line-height: 3.5rem;
+    /*text-align: center;*/
+    border: 1px dashed #04BE02;
+    border-radius: 50%;
+  }
+  .flowDisplay .lastFlow:before {
+    content: '';
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    top: 45%;
+    left: -1.59rem;
+    background-color: #04BE02;
+  }
+  .flowDisplay .lastFlow:after {
+    content: '';
+    width: 0.7rem;
+    height: 0.7rem;
+    position: absolute;
+    top: 31%;
+    left: -1.8rem;
+    background: #04BE02;
+    border-radius: 50%;
+  }
+  .flowDisplay .lastFlow .lastFlowDate{
+    padding: 0 1.5rem;
   }
 </style>

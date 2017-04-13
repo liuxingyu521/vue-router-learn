@@ -1,7 +1,7 @@
 <template>
   <li class="vux-timeline-item">
     <div :class="['vux-timeline-item-color', {'vux-timeline-item-head': !isFirst,'vux-timeline-item-head-first': isFirst }]" :style="headStyle">
-      <span >12</span>
+      <span >9</span>
     </div>
     <div class="vux-timeline-item-tail" :style="tailStyle"></div>
     <div class="vux-timeline-item-content">

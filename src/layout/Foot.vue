@@ -42,6 +42,7 @@
     line-height: 4rem;
     background-color: rgb(214, 213, 213);
     border-top: 1px solid #ccc;
+    z-index: 10;
   }
   .footer .f-item{
     flex: 1;
