@@ -33,32 +33,29 @@
         <span class="lastFlowType">支:</span>
         <span class="lastFlowMoney">33￥</span>
       </div>
-      <timeline>
-        <timeline-item>
-            <p class="recent">收入：3000￥</p>
-            <p class="recent">支出：3211￥</p>
-        </timeline-item>
-        <timeline-item>
-            <h4> 申通快递员 广东广州 收件员 xxx 已揽件</h4>
-            <p>2016-04-16 10:23:00</p>
-        </timeline-item>
-        <timeline-item>
-            <h4> 商家正在通知快递公司揽件</h4>
-            <p>2016-04-15 9:00:00</p>
-        </timeline-item>
-        <timeline-item>
-            <p class="recent">收入：3000￥</p>
-            <p class="recent">支出：3211￥</p>
-        </timeline-item>
-        <timeline-item>
-            <h4> 申通快递员 广东广州 收件员 xxx 已揽件</h4>
-            <p>2016-04-16 10:23:00</p>
-        </timeline-item>
-        <timeline-item>
-            <h4> 商家正在通知快递公司揽件</h4>
-            <p>2016-04-15 9:00:00</p>
-        </timeline-item>        
-      </timeline>
+      <flow-wrap>
+        <flow-item v-for="monthItem in flowBill" :isMonthItem="true">
+            <p>收入：{{ monthItem.totalIncome }}￥</p>
+            <p>支出：{{ monthItem.totalExpend }}￥</p>
+            <span class="remain">结余：{{ monthItem.totalIncome - monthItem.totalExpend }}￥</span>
+            <ul slot="dayFlow">
+              <flow-item v-for="dayItem in monthItem.days" :isDayItem="true">
+                <p>早中晚饭</p>
+                <p class="comment">无</p>
+                <span class="money">支出43￥</span>
+              </flow-item>
+            </ul>
+            <!-- <div slot="day-timeline">
+              <ul>
+                <flow-item>
+                  <p>早中晚饭</p>
+                  <p class="comment">无</p>
+                  <span class="money">支出43￥</span>
+                </flow-item>
+              </ul>
+            </div> -->
+        </flow-item>     
+      </flow-wrap>
     </div>
     <date-selector v-model="showDate"
     title="请选择日期"
@@ -83,8 +80,8 @@
 
 <script>
   import DateSelector from '../../components/confirm.vue';
-  import Timeline from '../../components/timeline.vue';
-  import TimelineItem from '../../components/timeline-item.vue';
+  import FlowWrap from '../../components/flowwrap.vue';
+  import FlowItem from '../../components/flowitem.vue';
 
   export default {
     props: {
@@ -95,6 +92,7 @@
     },
     data: function(){
       var cur_date = new Date();
+
       return {
         date: {
           c_year: cur_date.getFullYear(),
@@ -105,6 +103,7 @@
         flowDate: cur_date.getFullYear(),
         flowYear: cur_date.getFullYear(),
         flowMonth: cur_date.getMonth()+1,
+        flowBill: {}, // 控制渲染列表的数据
         expend: '122,200',
         income: '1,121,200',
         showDate: false
@@ -112,8 +111,11 @@
     },
     components: {
       DateSelector: DateSelector,
-      Timeline: Timeline,
-      TimelineItem: TimelineItem
+      FlowWrap: FlowWrap,
+      FlowItem: FlowItem
+    },
+    mounted: function(){
+      // console.log(this.bill);
     },
     filters: {
       formatFlowDate: function(text, type){
@@ -138,6 +140,10 @@
       },
       flowDate: function(val){
 
+      },
+      bill: function(){
+        console.log(this.bill);
+        this.filterBill();
       }
     },
     methods: {
@@ -156,6 +162,24 @@
         else{
           this.flowYear =  Number(this.flowDate.split('-')[0]);
           this.flowMonth = Number(this.flowDate.split('-')[1]);
+        }
+      },
+      filterBill: function(){
+        var _this = this;
+        if(_this.bill.lastBill != undefined){
+          var yearBill = _this.bill.years ? _this.bill.years.filter(function(val, index, arr){
+                            return val.year == _this.flowYear;
+                          }) : null;
+          console.log(yearBill);
+          if(_this.flowType == '年'){
+            _this.flowBill = yearBill !== null ? yearBill[0].monthes : new Array(12);
+            console.log(_this.flowBill);
+          }
+          
+        }
+        else{
+          // _this.flowBill = new Array(12);
+          // return _this.flowBill;
         }
       }
     }
@@ -328,5 +352,13 @@
   }
   .flowDisplay .lastFlow .lastFlowDate{
     padding: 0 1.5rem;
+  }
+  .flowDisplay .flow-item-content .remain,
+  .flowDisplay .flow-item-content .money{
+    position: absolute;
+    right: 0.5rem;
+    top: 2rem;
+    transform: translateY(-0.8rem);
+    font-size: 1.1rem;
   }
 </style>

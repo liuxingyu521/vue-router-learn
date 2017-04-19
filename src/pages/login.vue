@@ -101,7 +101,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 2rem;
-    padding-bottom: 11rem;
   }
   .loginPage header, .registerPage header {
     height: 10rem;

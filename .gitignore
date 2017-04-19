@@ -1,5 +1,6 @@
+./backend/database.json
+./npm-debug.log
 node_modules/
 dist/
 config/
 build/
-backend/database.json
