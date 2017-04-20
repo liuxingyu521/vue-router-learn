@@ -37,28 +37,43 @@ export default {
   background-color: #e4eff1;
 }
 
+.flow-item .flow-item{
+  border-right: none;
+  background-color: #f7f7f7;
+}
 
 .flow-item-content {
   padding: 0.3rem 0.3rem 0.3rem 2rem;
 }
 
+.flow-item .flow-item .flow-item-content{
+  padding: 0 0 0 2rem;
+}
+
 .flow-item-head{
   position:absolute;
-  content:'';
-  // z-index:99;
+  text-align: center;
+  z-index: 1;
   border-radius:99px;
   background-color: @timeline-item-bg-color;
 }
 
-.flow-wrap > ul > li.flow-item > .flow-item-head {
+.flow-item-head.flow-item-month{
   width: 2.7rem;
-  height: 2.7rem;
-  left: -1.3rem;
-  top: 0.6rem;
-  text-align: center;
+  height: 2.7rem; 
   line-height: 2.7rem;
-  font-size: 1.5rem;
-  z-index: 1;
+  left: -1.3rem;
+  top: 0.6rem;  
+  font-size: 1.5rem; 
+}
+
+.flow-item-head.flow-item-day{
+  width: 2.3rem;
+  height: 2.3rem;
+  left: -1.1rem;
+  top: 0.4rem;  
+  line-height: 2.3rem;
+  font-size: 1.2rem;
 }
 
 .flow-item-tail {
@@ -70,9 +85,23 @@ export default {
   top:0px;
   background-color: @timeline-item-bg-color;
 }
-
-
-.flow-item-color {
-  background-color: @timeline-item-bg-color;
+.flow-item.flow-item-last{
+  border-bottom: 1px solid @timeline-item-bg-color;
 }
+
+.flow-item-content .remain{
+  position: absolute;
+  right: 0.5rem;
+  top: 2rem;
+  transform: translateY(-0.8rem);
+  font-size: 1.1rem;
+}
+.flow-item-content .money{
+  position: absolute;
+  right: 0.5rem;
+  top: 1.7rem;
+  transform: translateY(-0.8rem);
+  font-size: 1rem;
+}
+
 </style>

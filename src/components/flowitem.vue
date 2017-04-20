@@ -1,5 +1,5 @@
 <template>
-  <li class="flow-item">
+  <li :class="['flow-item', {'flow-item-last': isLast}]">
     <div :class="['flow-item-head', {'flow-item-month': isMonthItem}, {'flow-item-day': isDayItem}]" >
       <span >{{ headNumber }}</span>
     </div>
@@ -14,7 +14,7 @@
 <script>
 
 export default {
-  props: ['isMonthItem', 'isDayItem', 'headNumber'],
+  props: ['isMonthItem', 'isDayItem', 'headNumber', 'isLast'],
   data () {
     return {
 

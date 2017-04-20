@@ -34,7 +34,7 @@
         <span class="lastFlowMoney">33￥</span>
       </div>
       <flow-wrap>
-        <flow-item v-for="monthItem in flowBill" :isMonthItem="true">
+        <flow-item v-for="(monthItem, index) in flowBill" :isMonthItem="true" :isLast="(index == flowBill.length-1) ? true : false">
             <p>收入：{{ monthItem.totalIncome }}￥</p>
             <p>支出：{{ monthItem.totalExpend }}￥</p>
             <span class="remain">结余：{{ monthItem.totalIncome - monthItem.totalExpend }}￥</span>
@@ -45,15 +45,6 @@
                 <span class="money">支出43￥</span>
               </flow-item>
             </ul>
-            <!-- <div slot="day-timeline">
-              <ul>
-                <flow-item>
-                  <p>早中晚饭</p>
-                  <p class="comment">无</p>
-                  <span class="money">支出43￥</span>
-                </flow-item>
-              </ul>
-            </div> -->
         </flow-item>     
       </flow-wrap>
     </div>
@@ -82,6 +73,7 @@
   import DateSelector from '../../components/confirm.vue';
   import FlowWrap from '../../components/flowwrap.vue';
   import FlowItem from '../../components/flowitem.vue';
+  import Util from '../../js/util.js';
 
   export default {
     props: {
@@ -142,7 +134,6 @@
 
       },
       bill: function(){
-        console.log(this.bill);
         this.filterBill();
       }
     },
@@ -166,20 +157,33 @@
       },
       filterBill: function(){
         var _this = this;
-        if(_this.bill.lastBill != undefined){
-          var yearBill = _this.bill.years ? _this.bill.years.filter(function(val, index, arr){
-                            return val.year == _this.flowYear;
-                          }) : null;
-          console.log(yearBill);
-          if(_this.flowType == '年'){
-            _this.flowBill = yearBill !== null ? yearBill[0].monthes : new Array(12);
+
+        var yearBill, monthes, monthBill; 
+
+        // 有某些年账单数据
+        if(!!_this.bill.years){
+          // 找到和选择的年份吻合的年账单
+          yearBill = _this.bill.years.filter(function(val, index, arr){
+            return val.year == _this.flowYear;
+          });
+
+          // 年账单存在
+          if(yearBill.length > 0){
+        
+            _this.flowBill = Util.fillYear(_this.flowYear, yearBill);
             console.log(_this.flowBill);
           }
-          
+          // 年账单不存在，构造整年
+          else{
+            yearBill = Util.fillYear(_this.flowYear);
+            _this.flowBill = yearBill;
+            console.log(yearBill);
+          }
         }
+        // 空用户，无账单数据
         else{
-          // _this.flowBill = new Array(12);
-          // return _this.flowBill;
+          yearBill = Util.fillYear(_this.flowYear);
+          _this.flowBill = yearBill;
         }
       }
     }
@@ -352,13 +356,5 @@
   }
   .flowDisplay .lastFlow .lastFlowDate{
     padding: 0 1.5rem;
-  }
-  .flowDisplay .flow-item-content .remain,
-  .flowDisplay .flow-item-content .money{
-    position: absolute;
-    right: 0.5rem;
-    top: 2rem;
-    transform: translateY(-0.8rem);
-    font-size: 1.1rem;
   }
 </style>
