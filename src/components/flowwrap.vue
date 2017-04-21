@@ -37,13 +37,17 @@ export default {
   background-color: #e4eff1;
 }
 
+.flow-item ul{
+  display: none;
+}
+
 .flow-item .flow-item{
   border-right: none;
   background-color: #f7f7f7;
 }
 
 .flow-item-content {
-  padding: 0.3rem 0.3rem 0.3rem 2rem;
+  padding: 0.3rem 0.3rem 0.3rem 2.5rem;
 }
 
 .flow-item .flow-item .flow-item-content{
@@ -54,26 +58,30 @@ export default {
   position:absolute;
   text-align: center;
   z-index: 1;
-  border-radius:99px;
-  background-color: @timeline-item-bg-color;
 }
 
-.flow-item-head.flow-item-month{
-  width: 2.7rem;
-  height: 2.7rem; 
-  line-height: 2.7rem;
+.flow-item-month .flow-item-head{
+  top: 0.8rem;
   left: -1.3rem;
-  top: 0.6rem;  
-  font-size: 1.5rem; 
+  border-radius: 0.2rem;
+  width: 3rem;
+  height: 2.1rem;
+  line-height: 2.2rem;
+  font-size: 1.4rem;
+  color: #3143e2;
+  background-color: #fbb93f;
 }
 
-.flow-item-head.flow-item-day{
-  width: 2.3rem;
-  height: 2.3rem;
-  left: -1.1rem;
-  top: 0.4rem;  
-  line-height: 2.3rem;
+.flow-item-day .flow-item-head{
+  width: 2rem;
+  height: 2rem;
+  left: -1rem;
+  top: 0.5rem;  
+  line-height: 2.2rem;
   font-size: 1.2rem;
+  border-radius: 50%;
+  color: white;
+  background-color: @timeline-item-bg-color;
 }
 
 .flow-item-tail {

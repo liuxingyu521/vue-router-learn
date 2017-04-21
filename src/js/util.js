@@ -11,9 +11,9 @@ Util.fillDay = function(date){
   dayBills.bill = [];
   dayBills.bill.push({
     id: "",
-    type: "无",
+    type: "",
     money: "0",
-    comment: "无"
+    comment: "无备注"
   });
 
   return dayBills;

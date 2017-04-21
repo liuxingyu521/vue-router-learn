@@ -34,15 +34,23 @@
         <span class="lastFlowMoney">33￥</span>
       </div>
       <flow-wrap>
-        <flow-item v-for="(monthItem, index) in flowBill" :isMonthItem="true" :isLast="(index == flowBill.length-1) ? true : false">
+        <flow-item v-for="(monthItem, index) in flowBill" 
+        :isMonthItem="true" 
+        :isLast="(index == flowBill.length-1) ? true : false"
+        :headText="monthItem.month+'月'"
+        @slideUl="slideUl"
+        >
             <p>收入：{{ monthItem.totalIncome }}￥</p>
             <p>支出：{{ monthItem.totalExpend }}￥</p>
-            <span class="remain">结余：{{ monthItem.totalIncome - monthItem.totalExpend }}￥</span>
+            <span class="remain">结余：{{ monthItem.remain}}￥</span>
             <ul slot="dayFlow">
-              <flow-item v-for="dayItem in monthItem.days" :isDayItem="true">
-                <p>早中晚饭</p>
-                <p class="comment">无</p>
-                <span class="money">支出43￥</span>
+              <flow-item v-for="(dayItem, index) in monthItem.days"
+              :isMonthItem="false"
+              :headText="dayItem.day"
+              >
+                <p>{{ dayItem.bill[0].type == "" ? "没有记录" : dayItem.bill[0].type }}</p>
+                <p class="comment">{{ dayItem.bill[0].comment }}</p>
+                <span class="money">{{ dayItem.bill[0].money == "0" ? "0" : ("支："+ dayItem.bill[0].money)}}￥</span>
               </flow-item>
             </ul>
         </flow-item>     
@@ -74,6 +82,7 @@
   import FlowWrap from '../../components/flowwrap.vue';
   import FlowItem from '../../components/flowitem.vue';
   import Util from '../../js/util.js';
+  import $ from 'jquery';
 
   export default {
     props: {
@@ -176,15 +185,19 @@
           // 年账单不存在，构造整年
           else{
             yearBill = Util.fillYear(_this.flowYear);
-            _this.flowBill = yearBill;
-            console.log(yearBill);
+            _this.flowBill = yearBill.monthes;
+            console.log(_this.flowBill);
           }
         }
         // 空用户，无账单数据
         else{
           yearBill = Util.fillYear(_this.flowYear);
-          _this.flowBill = yearBill;
+          _this.flowBill = yearBill.monthes;
+          console.log(_this.flowBill);
         }
+      },
+      slideUl: function($itemMonth){
+        $itemMonth.find('ul').toggle();
       }
     }
     
