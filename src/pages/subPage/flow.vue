@@ -4,7 +4,7 @@
       <div class="calendar">
         <span class="static">today</span>
         <span class="c-month">{{ date.c_month }}月</span>
-        <span class="c-day"><b>{{ date.c_day }}</b></span>
+        <span class="c-day"><b>{{ date.c_day | fillZero }}</b></span>
       </div>
       <div class="display">
         <div class="display-title">
@@ -83,6 +83,7 @@
   import FlowItem from '../../components/flowitem.vue';
   import Util from '../../js/util.js';
   import $ from 'jquery';
+  import dateUtil from '../../js/date.js';
 
   export default {
     props: {
@@ -126,6 +127,10 @@
         else{
           return text;
         }
+      },
+      fillZero: function(day){
+        console.log(day);
+        return dateUtil.fillZero(Number(day));
       }
     },
     watch: {
