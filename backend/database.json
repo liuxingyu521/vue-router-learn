@@ -1,0 +1,56 @@
+{
+  "name": "userDatabase",
+  "version": "v0.0.1",
+  "users": [
+    {
+      "username": "sss",
+      "password": "sss",
+      "bill": {
+        "total": "200000"
+      }
+    },
+    {
+      "username": "1",
+      "password": "1",
+      "bill": {
+        "lastBill": {
+          "id": "2017-5-10 23:10:46",
+          "type": "expend",
+          "class": "101",
+          "money": "",
+          "comment": ""
+        },
+        "years": [
+          {
+            "year": "",
+            "totalExpend": "0",
+            "totalIncome": "0",
+            "monthes": [
+              {
+                "month": "",
+                "totalExpend": "0",
+                "totalIncome": "0",
+                "days": [
+                  {
+                    "day": "",
+                    "totalExpend": "",
+                    "totalIncome": "",
+                    "bill": [
+                      {
+                        "id": "2017-5-10 23:10:46",
+                        "type": "expend",
+                        "class": "101",
+                        "money": "",
+                        "comment": ""
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

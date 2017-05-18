@@ -129,7 +129,6 @@
         }
       },
       fillZero: function(day){
-        console.log(day);
         return dateUtil.fillZero(Number(day));
       }
     },
@@ -291,7 +290,7 @@
     width: 6rem;
     padding: 0 .5rem;
     font-size: 1.2rem;
-    line-height: 2.3rem;
+    line-height: 2.5rem;
     box-sizing: border-box;
     box-shadow: inset 0px 0px 6px 4px rgba(226, 110, 27, 0.2);
     border: 1px dashed #e26e1b;
