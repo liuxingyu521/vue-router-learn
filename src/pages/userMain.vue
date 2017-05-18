@@ -1,7 +1,7 @@
 <template>
   <div class="userPage">
     <z-head :showUser="showUser">账单管家</z-head>
-    <router-view @sessionFail="sessionFail" :bill="bill"></router-view>
+    <router-view @sessionFail="sessionFail" :bill="bill"></router-view>d
     <z-footer :showFooter="showFooter"></z-footer>
   </div>
 </template>

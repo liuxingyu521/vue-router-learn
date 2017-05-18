@@ -1,4 +1,5 @@
 var DateUtil = require('./date.js');
+console.log(DateUtil.fillZero(7));
 var obj = {
   "total": "123",
   "monthes": [
@@ -111,6 +112,7 @@ Util.fillYear = function(year, yearBill){
 
   return _yearBill;
 }
-console.log(Util.fillYear(2001).monthes[0].days[0]);
+// console.log(Util.fillYear(2001).monthes[0].days[0]);
+
 
 

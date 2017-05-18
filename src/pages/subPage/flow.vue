@@ -17,11 +17,11 @@
         <div class="display-content">
           <div class="expend-wrap">
             <span class="text">本{{ flowType }}支出:</span>
-            <span class="expend"><b>{{ expend }}</b>￥</span>
+            <span class="expend"><b>{{ totalExpend }}</b>￥</span>
           </div>
           <div class="income-wrap">
             <span class="text">本{{ flowType }}收入:</span>
-            <span class="income"><b>{{ income }}</b>￥</span>
+            <span class="income"><b>{{ totalIncome }}</b>￥</span>
           </div>
         </div>
       </div>
@@ -103,11 +103,11 @@
         },
         flowType: '年',
         flowDate: cur_date.getFullYear(),
-        flowYear: cur_date.getFullYear(),
+        flowYear: cur_date.getFullYear()-1,
         flowMonth: cur_date.getMonth()+1,
         flowBill: {}, // 控制渲染列表的数据
-        expend: '122,200',
-        income: '1,121,200',
+        totalExpend: '0',
+        totalIncome: '0',
         showDate: false
       }
     },
@@ -116,8 +116,9 @@
       FlowWrap: FlowWrap,
       FlowItem: FlowItem
     },
+    // 挂载flow.vue的时候再次填充flow列表
     mounted: function(){
-      // console.log(this.bill);
+      this.filterBill();
     },
     filters: {
       formatFlowDate: function(text, type){
@@ -183,21 +184,22 @@
           // 年账单存在
           if(yearBill.length > 0){
         
-            _this.flowBill = Util.fillYear(_this.flowYear, yearBill);
-            console.log(_this.flowBill);
+            _this.flowBill = Util.fillYear(_this.flowYear, yearBill[0]);
+            console.log(yearBill);
+            // 总的收支标签展示
+            this.totalExpend = yearBill.totalExpend;
+            this.totalIncome = yearBill.totalIncome;
           }
           // 年账单不存在，构造整年
           else{
             yearBill = Util.fillYear(_this.flowYear);
             _this.flowBill = yearBill.monthes;
-            console.log(_this.flowBill);
           }
         }
         // 空用户，无账单数据
         else{
           yearBill = Util.fillYear(_this.flowYear);
           _this.flowBill = yearBill.monthes;
-          console.log(_this.flowBill);
         }
       },
       slideUl: function($itemMonth){

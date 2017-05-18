@@ -38,7 +38,7 @@
         toastMessage: ''
       }
     },
-    components:{
+    components:{ 
       Toast: Toast
     },
     methods: {
