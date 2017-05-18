@@ -50,7 +50,7 @@ Util.fillMonth = function(month, year, monthObj){
 
 Util.fillYear = function(year, yearBill){
   var _yearBill = {};
-      
+
   _yearBill.year = year;
   _yearBill.totalExpend = "0";
   _yearBill.totalIncome = "0";
@@ -59,10 +59,12 @@ Util.fillYear = function(year, yearBill){
   _yearBill.monthes = _yearBill.monthes.map(function(val, index, arr){
     return Util.fillMonth(index+1, year);
   });
-
+console.log(_yearBill);
   if(!!yearBill){
     Object.assign(_yearBill, yearBill);
   }
+console.log(_yearBill);
+console.log(yearBill);
 
   return _yearBill;
 }
