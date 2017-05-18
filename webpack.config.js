@@ -35,7 +35,6 @@ module.exports = {
     },
     devServer: {
         // host: '0.0.0.0',
-        host: '192.168.191.4',
         port: '8888',
         proxy: {
           '/users/*': {
