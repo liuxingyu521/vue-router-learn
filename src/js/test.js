@@ -1,5 +1,5 @@
 var DateUtil = require('./date.js');
-console.log(DateUtil.fillZero(7));
+// console.log(DateUtil.fillZero(7));
 var obj = {
   "total": "123",
   "monthes": [
@@ -16,9 +16,11 @@ var obj = {
 
 var dest = {
   "total": "dest",
+  "hh": "jjjj",
   "monthes": [
     {
       "month": "1",
+      "jasd": "laksjdf",
       "total": "1"
     },
     {
@@ -48,7 +50,56 @@ var dest = {
 //     return e;
 //   });
 // })
+
+
+
 var Util = {};
+
+Util.deepCopy = function(dest, src){
+
+  for(var key in src){
+    if(typeof(src[key]) != 'object'){
+      dest[key] = src[key];
+    }
+    else if(Object.prototype.toString.call(src[key]).slice(8, -1).toLowerCase() == 'array'){
+      // if(key == 'years'){
+      //   src[key].forEach(function(val, index, arr){
+      //     dest[key].forEach(function(v, i, a){
+      //       if(v.year == val.year){
+      //         Util.deepCopy(v, val);
+      //       }
+      //     })
+      //   })
+      // }
+      if(key == 'monthes'){
+        src[key].forEach(function(val, index, arr){
+          dest[key].forEach(function(v, i, a){
+            if(v.month == val.month){
+              Util.deepCopy(v, val);
+            }
+          })
+        })
+      }
+      else if(key == 'days'){
+        src[key].forEach(function(val, index, arr){
+          dest[key].forEach(function(v, i, a){
+            if(v.day == val.day){
+              Util.deepCopy(v, val);
+            }
+          })
+        })
+      }
+      else if(key == 'bills'){
+        src[key].forEach(function(val, index, arr){
+          dest[key].push(val);
+        })
+      }
+    }
+    // else if(Object.prototype.toString.call(src[key]).slice(8, -1).toLowerCase() == 'object'){
+    //   Object.assign(dest[key], src[key]);
+    // }
+  }
+}
 
 Util.fillDay = function(date){
   var dayBills = {};
@@ -56,13 +107,7 @@ Util.fillDay = function(date){
   dayBills.day = date;
   dayBills.totalExpend = "0";
   dayBills.totalIncome = "0";
-  dayBills.bill = [];
-  dayBills.bill.push({
-    id: "",
-    type: "无",
-    money: "0",
-    comment: "无"
-  });
+  dayBills.bills = [];
 
   return dayBills;
 }
@@ -112,7 +157,45 @@ Util.fillYear = function(year, yearBill){
 
   return _yearBill;
 }
-// console.log(Util.fillYear(2001).monthes[0].days[0]);
 
+var dest = Util.fillYear(2017);
+var src = {
+            "year": "2017",
+            "totalExpend": "200",
+            "totalIncome": "300",
+            "monthes": [
+              {
+                "month": "1",
+                "totalExpend": "200",
+                "totalIncome": "300",
+                "days": [
+                  {
+                    "day": "1",
+                    "totalExpend": "200",
+                    "totalIncome": "300",
+                    "bills": [
+                      {
+                        "id": "20170519111355",
+                        "type": "expend",
+                        "class": "101",
+                        "money": "200",
+                        "comment": "fighting"
+                      },
+                      {
+                        "id": "20170519111354",
+                        "type": "income",
+                        "class": "201",
+                        "money": "300",
+                        "comment": "happy"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          };
+
+Util.deepCopy(dest, src);
+console.log(dest);
 
 

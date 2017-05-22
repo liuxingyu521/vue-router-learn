@@ -50,7 +50,7 @@ export default {
     padding: 0.3rem 0.3rem 0.3rem 2.5rem;
   }
 
-  .flow-item .flow-item .flow-item-content{
+  .flow-item-day .flow-item-content{
     padding: 0 0 0 2rem;
   }
 
@@ -111,5 +111,15 @@ export default {
     transform: translateY(-0.8rem);
     font-size: 1rem;
   }
-
+  .flow-item-content .bill-item{
+    position: relative;
+  }
+  .flow-item-content .bill-item:after{
+    content: '';
+    position: absolute;
+    right: 0;
+    height: 1px;
+    width: 20.9rem;
+    background: #04be02;
+  }
 </style>

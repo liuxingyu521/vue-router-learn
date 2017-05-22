@@ -14,14 +14,14 @@
           </select>
           <div class="flow-date" @click="showDate=true">{{ flowDate | formatFlowDate(flowType) }}</div>
         </div>
-        <div class="display-content">
+        <div class="display-content">　
           <div class="expend-wrap">
             <span class="text">本{{ flowType }}支出:</span>
-            <span class="expend"><b>{{ totalExpend }}</b>￥</span>
+            <span class="expend"><b class="expendColor">{{ totalExpend }}</b>￥</span>
           </div>
           <div class="income-wrap">
             <span class="text">本{{ flowType }}收入:</span>
-            <span class="income"><b>{{ totalIncome }}</b>￥</span>
+            <span class="income"><b class="incomeColor">{{ totalIncome }}</b>￥</span>
           </div>
         </div>
       </div>
@@ -29,11 +29,11 @@
     <div class="flowDisplay">
       <div class="lastFlow">
         最新流水
-        <span class="lastFlowDate">3月20日</span>
-        <span class="lastFlowType">支:</span>
-        <span class="lastFlowMoney">33￥</span>
+        <span class="lastFlowDate">{{ latestFlow.date}}</span>
+        <span class="lastFlowType">{{ latestFlow.type}}</span>
+        <span class="lastFlowMoney">{{ latestFlow.money}}</span>
       </div>
-      <flow-wrap>
+      <flow-wrap v-if="showYearFlow">
         <flow-item v-for="(monthItem, index) in flowBill" 
         :isMonthItem="true" 
         :isLast="(index == flowBill.length-1) ? true : false"
@@ -48,12 +48,27 @@
               :isMonthItem="false"
               :headText="dayItem.day"
               >
-                <p>{{ dayItem.bill[0].type == "" ? "没有记录" : dayItem.bill[0].type }}</p>
-                <p class="comment">{{ dayItem.bill[0].comment }}</p>
-                <span class="money">{{ dayItem.bill[0].money == "0" ? "0" : ("支："+ dayItem.bill[0].money)}}￥</span>
+                <div class="bill-item" v-for="(bill, index) in dayItem.bills">
+                  <p>{{ bill.className == "" ? "没有记录" : bill.className }}</p>
+                  <p class="comment">{{ bill.comment == "" ? "无备注" : bill.comment }}</p>
+                  <span class="money" v-bind:class="addMoneyColor(bill)">{{ bill | billMoney }}￥</span>
+                </div>
               </flow-item>
             </ul>
         </flow-item>     
+      </flow-wrap>
+      <flow-wrap v-else>
+        <flow-item v-for="(dayItem, index) in flowBill"
+        :isMonthItem="false"
+        :isLast="(index == flowBill.length-1) ? true : false"
+        :headText="dayItem.day"
+        >
+          <div class="bill-item" v-for="(bill, index) in dayItem.bills">
+            <p>{{ bill.className == "" ? "没有记录" : bill.className }}</p>
+            <p class="comment">{{ bill.comment == "" ? "无备注" : bill.comment }}</p>
+            <span class="money" v-bind:class="addMoneyColor(bill)">{{ bill | billMoney }}￥</span>
+          </div>
+        </flow-item>
       </flow-wrap>
     </div>
     <date-selector v-model="showDate"
@@ -83,7 +98,7 @@
   import FlowItem from '../../components/flowitem.vue';
   import Util from '../../js/util.js';
   import $ from 'jquery';
-  import dateUtil from '../../js/date.js';
+  var dateUtil = require('../../js/date.js');
 
   export default {
     props: {
@@ -103,12 +118,18 @@
         },
         flowType: '年',
         flowDate: cur_date.getFullYear(),
-        flowYear: cur_date.getFullYear()-1,
+        flowYear: cur_date.getFullYear(),
         flowMonth: cur_date.getMonth()+1,
         flowBill: {}, // 控制渲染列表的数据
         totalExpend: '0',
         totalIncome: '0',
-        showDate: false
+        showDate: false,
+        showYearFlow: true,//流水展示类型判断
+        latestFlow: {
+          date: '无纪录',
+          type: '',
+          money: ''
+        }
       }
     },
     components: {
@@ -131,17 +152,32 @@
       },
       fillZero: function(day){
         return dateUtil.fillZero(Number(day));
+      },
+      billMoney: function(bill){
+        if(bill.money == '0'){
+          return '0';
+        }
+        else if(bill.type == 'expend'){
+          return ('支：' + bill.money);
+        }
+        else{
+          return ('收：' + bill.money);
+        }
       }
     },
     watch: {
       flowType: function(val){
         if(val == '年'){
           this.flowDate = this.flowYear = this.date.c_year;
+          this.filterBill();
+          this.showYearFlow = true;
         }
         else{
           this.flowDate = this.date.c_year + '-' + this.date.c_month;
           this.flowMonth = this.date.c_month;
           this.flowYear = this.date.c_year;
+          this.filterBill();
+          this.showYearFlow = false;
         }
       },
       flowDate: function(val){
@@ -155,9 +191,11 @@
       setFlowDate: function(){
         if(this.flowType == '年'){
           this.flowDate = this.flowYear;
+          this.filterBill();
         }
         else{
           this.flowDate = this.flowYear + '-' + this.flowMonth;
+          this.filterBill();
         }
       },
       setFlowYearMonth: function(){
@@ -172,7 +210,9 @@
       filterBill: function(){
         var _this = this;
 
-        var yearBill, monthes, monthBill; 
+        var yearBill, monthBill; 
+
+        console.log(this.bill);
 
         // 有某些年账单数据
         if(!!_this.bill.years){
@@ -183,27 +223,63 @@
 
           // 年账单存在
           if(yearBill.length > 0){
-        
-            _this.flowBill = Util.fillYear(_this.flowYear, yearBill[0]);
-            console.log(yearBill);
-            // 总的收支标签展示
-            this.totalExpend = yearBill.totalExpend;
-            this.totalIncome = yearBill.totalIncome;
+            // 流水账单的展示类型
+            if(_this.flowType == '年'){
+              _this.flowBill = Util.fillYear(_this.flowYear, yearBill[0]).monthes;
+
+              // 总的收支标签展示
+              _this.totalExpend = yearBill[0].totalExpend;
+              _this.totalIncome = yearBill[0].totalIncome;
+            }
+            else{
+              monthBill = Util.fillYear(_this.flowYear, yearBill[0]).monthes.filter(function(val, index, arr){
+                return val.month == _this.flowMonth;
+              })[0];
+              _this.flowBill = monthBill.days;
+              // 总的收支标签展示
+              _this.totalExpend = monthBill.totalExpend;
+              _this.totalIncome = monthBill.totalIncome;
+            }
           }
           // 年账单不存在，构造整年
           else{
             yearBill = Util.fillYear(_this.flowYear);
             _this.flowBill = yearBill.monthes;
+            // 总的收支标签清零
+            _this.totalExpend = '0';
+            _this.totalIncome = '0';
           }
+          // 最新流水展示
+          _this.latestFlow.date = _this.bill.lastBill.id.slice(4,6) + '月' + _this.bill.lastBill.id.slice(6,8) + '日';
+          _this.latestFlow.type = _this.bill.lastBill.type == 'expend' ? '支：' : '收：';
+          _this.latestFlow.money = _this.bill.lastBill.money + '¥';
         }
         // 空用户，无账单数据
         else{
           yearBill = Util.fillYear(_this.flowYear);
           _this.flowBill = yearBill.monthes;
+          console.log(yearBill.monthes);
         }
       },
       slideUl: function($itemMonth){
         $itemMonth.find('ul').toggle();
+      },
+      addMoneyColor: function(bill){
+        if(bill.type == 'expend'){
+          return {
+            expendColor: true
+          };
+        }
+        else if(bill.type == 'income'){
+          return {
+            incomeColor: true
+          };
+        }
+        else{
+          return {
+            expendColor: false
+          }
+        }
       }
     }
     
@@ -314,10 +390,10 @@
     text-align: right;
     text-indent: 0;
   }
-  .totalDisplay .display .display-content span.expend b{
+  .expendColor{
     color: red;
   }
-  .totalDisplay .display .display-content span.income b{
+  .incomeColor{
     color: #11bb11;
   }
   /* 日期选择窗 */
@@ -374,6 +450,6 @@
     border-radius: 50%;
   }
   .flowDisplay .lastFlow .lastFlowDate{
-    padding: 0 1.5rem;
+    padding: 0 1rem;
   }
 </style>

@@ -60,7 +60,6 @@
           password: _this.password
         })
         .then(function(response){
-          console.log(response);
           if(response.data.stateCode == 0){
             _this.$router.push('/user/' + response.data.userId + '/flow');
           }else{

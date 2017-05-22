@@ -51,7 +51,7 @@ Util.fillDay = function(date){
     type: "",
     class: "",
     className: "",
-    money: "",
+    money: "0",
     comment: ""
   })
 
