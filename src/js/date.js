@@ -4,11 +4,11 @@ DateUtil.isLeapYear = function(year){
    return (year % 4 == 0) && (year % 100 != 0 || year % 400 == 0);
 }
 
-DateUtil.fillZero = function(day){
-	if(day > 0 && day < 10){
-		return '0' + day;
+DateUtil.fillZero = function(num){
+	if(num >= 0 && num < 10){
+		return '0' + num;
 	}
-	return day;
+	return num;
 }
-export default DateUtil;
-// module.exports = DateUtil;
+// export default DateUtil;
+module.exports = DateUtil;

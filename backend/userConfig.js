@@ -1,45 +1,57 @@
+var DateUtil = require('../src/js/date.js');
+
 function UserConfig(name, pwd){
   this.username = name; 
   this.password = pwd;
 
   var date = new Date();
   var initId = date.getFullYear()
-          +'-'+(date.getMonth()+1)
-          +'-'+date.getDate()
-          +' '+date.getHours()
-          +':'+date.getMinutes()
-          +':'+date.getSeconds();
+          +''+DateUtil.fillZero(date.getMonth()+1)
+          +''+DateUtil.fillZero(date.getDate())
+          +''+DateUtil.fillZero(date.getHours())
+          +''+DateUtil.fillZero(date.getMinutes())
+          +''+DateUtil.fillZero(date.getSeconds());
 
   this.bill = {
     "lastBill": {
       "id": initId,
       "type": "expend",
       "class": "101",
+      "className": "食品酒水",
       "money": "",
       "comment": ""
     },
     "years": [
       {
-        "year": "",
-        "totalExpend": "0",
-        "totalIncome": "0",
+        "year": "2017",
+        "totalExpend": "200",
+        "totalIncome": "300",
         "monthes": [
           {
-            "month": "",
-            "totalExpend": "0",
-            "totalIncome": "0",
+            "month": "1",
+            "totalExpend": "200",
+            "totalIncome": "300",
             "days": [
               {
-                "day": "",
-                "totalExpend": "",
-                "totalIncome": "",
-                "bill": [
+                "day": "1",
+                "totalExpend": "200",
+                "totalIncome": "300",
+                "bills": [
                   {
                     "id": initId,
                     "type": "expend",
                     "class": "101",
-                    "money": "",
-                    "comment": "" 
+                    "className": "食品酒水",
+                    "money": "200",
+                    "comment": "fighting" 
+                  },
+                  {
+                    "id": String(initId - 1),
+                    "type": "income",
+                    "class": "201",
+                    "className": "工资收入",
+                    "money": "300",
+                    "comment": "happy"
                   }
                 ]
               }
