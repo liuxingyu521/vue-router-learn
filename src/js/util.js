@@ -103,7 +103,7 @@ Util.fillYear = function(year, yearBill){
   if(!!yearBill){
     Util.deepCopy(_yearBill, yearBill);
   }
-console.log(_yearBill);
+  
   return _yearBill;
 }
 

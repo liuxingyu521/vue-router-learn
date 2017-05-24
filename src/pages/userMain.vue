@@ -1,8 +1,8 @@
 <template>
   <div class="userPage">
     <z-head :showUser="showUser">账单管家</z-head>
-    <router-view @sessionFail="sessionFail" :bill="bill"></router-view>d
-    <z-footer :showFooter="showFooter"></z-footer>
+    <router-view @sessionFail="sessionFail" :bill="bill" @onlyKeepAccount="changeFoot"></router-view>
+    <z-footer :onlyKeepAccount="onlyKeepAccount" @changeFoot="changeFoot"></z-footer>
   </div>
 </template>
 
@@ -15,7 +15,7 @@
     data: function(){
       return {
         showUser: true,
-        showFooter: true,
+        onlyKeepAccount: false,
         bill: {}
       };
     },
@@ -53,6 +53,9 @@
     methods: {
       sessionFail: function(data){
         this.$emit('toast', data);
+      },
+      changeFoot: function(o){
+        this.onlyKeepAccount = o.onlyKeepAccount;
       }
     }
   }

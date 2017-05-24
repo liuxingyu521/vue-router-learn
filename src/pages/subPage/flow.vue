@@ -212,7 +212,6 @@
 
         var yearBill, monthBill; 
 
-        console.log(this.bill);
 
         // 有某些年账单数据
         if(!!_this.bill.years){
@@ -258,7 +257,6 @@
         else{
           yearBill = Util.fillYear(_this.flowYear);
           _this.flowBill = yearBill.monthes;
-          console.log(yearBill.monthes);
         }
       },
       slideUl: function($itemMonth){

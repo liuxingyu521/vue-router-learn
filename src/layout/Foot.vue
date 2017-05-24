@@ -1,18 +1,24 @@
 <template>
-  <div class="footer" v-if="showFooter">
-    <div class="f-item">
+  <div class="footer">
+    <div class="f-item" v-show="!onlyKeepAccount">
       <router-link to="flow" active-class="f-active">
         <i class="iconfont icon-liushui"></i>
         <p>流水</p>
       </router-link>
     </div>
-    <div class="f-item keepAccount">
+    <div class="f-item keepAccount" v-show="!onlyKeepAccount">
       <router-link to="keepAccount" active-class="f-active">
         <span ><i class="iconfont icon-jiahao"></i></span>
         <p>记账</p>
       </router-link>
     </div>
-    <div class="f-item">
+    <div class="f-item keepAccount onlyKeepAccount" v-show="onlyKeepAccount">
+      <a href="javascript:void(0)" @click="changeFoot">
+        <span ><i class="iconfont icon-jiahao"></i></span>
+        <p>记账</p>
+      </a>
+    </div>
+    <div class="f-item" v-show='!onlyKeepAccount'>
       <router-link to="statistics" active-class="f-active">
         <i class="iconfont icon-charts"></i>
         <p >图表</p>
@@ -24,9 +30,17 @@
 <script>
   export default {
     props: {
-      showFooter: {
+      onlyKeepAccount: {
         type: Boolean,
-        default: true
+        default: false
+      }
+    },
+    methods: {
+      changeFoot: function(){
+        this.$emit('changeFoot',{
+          onlyKeepAccount: false
+        });
+        this.$router.push('flow');
       }
     }
   }
@@ -84,6 +98,12 @@
     border-radius: 50%;
     font-size: 3rem;
     color: #f3f3f3;
+  }
+  .footer .f-item.onlyKeepAccount span{
+    transform: rotate(45deg);
+  }
+  .footer .f-item.onlyKeepAccount span + p{
+    color: #ff6600;
   }
   .footer .f-item.keepAccount span .iconfont{ 
     font-size: 2rem;
