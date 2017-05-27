@@ -6,8 +6,8 @@
   :hide-on-blur="hideOnBlur"
   @on-hide="$emit('on-hide')"
   @on-show="$emit('on-show')">
-    <div class="weui-dialog__hd"><strong class="weui-dialog__title">{{title}}</strong></div>
-    <div class="weui-dialog__bd"><slot></slot></div>
+    <div class="weui-dialog__hd" :style="displayHead"><strong class="weui-dialog__title">{{title}}</strong></div>
+    <div class="weui-dialog__bd" :style="padding"><slot></slot></div>
     <div class="weui-dialog__ft">
       <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" @click="onCancel">{{cancelText || '取消'}}</a>
       <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" @click="onConfirm">{{confirmText || '确认'}}</a>
@@ -40,6 +40,10 @@ export default {
     dialogTransition: {
       type: String,
       default: 'vux-dialog'
+    },
+    noHead: {
+      type: Boolean,
+      default: false
     }
   },
   created: function() {
@@ -58,7 +62,13 @@ export default {
   },
   data: function() {
     return {
-      showValue: false
+      showValue: false,
+      displayHead: {
+        display: this.noHead ? 'none' : 'block'
+      },
+      padding: {
+        padding: this.noHead ? '0' : '1.5em 1.3em 1.5em'
+      }
     }
   },
   methods: {

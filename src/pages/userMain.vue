@@ -1,7 +1,7 @@
 <template>
   <div class="userPage">
     <z-head :showUser="showUser">账单管家</z-head>
-    <router-view @sessionFail="sessionFail" :bill="bill" @onlyKeepAccount="changeFoot"></router-view>
+    <router-view @toastMessage="toastMessage" :bill="bill" @onlyKeepAccount="changeFoot"></router-view>
     <z-footer :onlyKeepAccount="onlyKeepAccount" @changeFoot="changeFoot"></z-footer>
   </div>
 </template>
@@ -51,7 +51,7 @@
         })
     },
     methods: {
-      sessionFail: function(data){
+      toastMessage: function(data){
         this.$emit('toast', data);
       },
       changeFoot: function(o){

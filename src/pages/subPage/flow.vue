@@ -404,13 +404,15 @@
     width: 3.5rem;
   }
   .container .year-month-wrap .year-selector,
-  .container .year-month-wrap .month-selector{
+  .container .year-month-wrap .month-selector,
+  .container .year-month-wrap .day-selector{
     flex: 1;
   }
   .container .year-month-wrap .year-selector p,
-  .container .year-month-wrap .month-selector p{
+  .container .year-month-wrap .month-selector p,
+  .container .year-month-wrap .day-selector p{
     display: inline-block;
-    width: 8rem;
+    width: 100%;
     height: 2rem;
     line-height: 2rem;
     text-align: center;

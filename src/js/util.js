@@ -66,17 +66,8 @@ Util.fillMonth = function(month, year, monthObj){
   _monthObj.totalIncome = "0";
   _monthObj.remain = "0";
   _monthObj.days = [];
-
-  if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
-    _monthObj.days.length = 31;
-  }
-  else if(month == 2){
-    _monthObj.days.length =  DateUtil.isLeapYear(year) ? 29 : 28; 
-  }
-  else{
-    _monthObj.days.length = 30;
-  }
-
+  _monthObj.days.length = DateUtil.daysInMonth(year, month);
+  
   _monthObj.days = _monthObj.days.fill(0).map(function(val, index, arr){
     return Util.fillDay(index+1);
   })
@@ -103,7 +94,7 @@ Util.fillYear = function(year, yearBill){
   if(!!yearBill){
     Util.deepCopy(_yearBill, yearBill);
   }
-  
+
   return _yearBill;
 }
 

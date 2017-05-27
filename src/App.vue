@@ -4,7 +4,7 @@
       <router-view class="child-view" v-on:loading="loading" v-on:toast="toast"></router-view>
     </transition>
     <loading v-model="isLoading" :text="loadingText"></loading>
-    <toast v-model="showPositionValue" type="text" :time="1500" isShowMask width="auto" position="bottom">{{ toastMessage }}</toast>
+    <toast v-model="showPositionValue" type="text" :time="1500" isShowMask width="auto" :position="toastPos">{{ toastMessage }}</toast>
   </div>
 </template>
 
@@ -20,7 +20,8 @@
         isLoading: false,
         loadingText: '',
         showPositionValue: false,
-        toastMessage: ''
+        toastMessage: '',
+        toastPos: 'bottom'
       }
     },
     components: {
@@ -38,6 +39,7 @@
       toast: function(data){
         this.toastMessage = data.toastMessage;
         this.showPositionValue = data.isToast;
+        this.toastPos = data.position ? data.position : 'bottom';
       }
     },
     watch: {
