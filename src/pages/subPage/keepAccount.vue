@@ -133,6 +133,151 @@
 						value: '112',
 						parent: '11'
 					},
+					{
+						name: '居家物业',
+						value: '12',
+						parent: 0
+					},
+					{
+						name: '日常用品',
+						value: '120',
+						parent: '12'
+					},
+					{
+						name: '水电煤气',
+						value: '121',
+						parent: '12'
+					},
+					{
+						name: '房租',
+						value: '122',
+						parent: '12'
+					},
+					{
+						name: '物业管理',
+						value: '123',
+						parent: '12'
+					},
+					{
+						name: '行车交通',
+						value: '13',
+						parent: 0
+					},
+					{
+						name: '公共交通',
+						value: '130',
+						parent: '13'
+					},
+					{
+						name: '打车租车',
+						value: '131',
+						parent: '13'
+					},
+					{
+						name: '私家车费用',
+						value: '132',
+						parent: '13'
+					},
+					{
+						name: '交流通讯',
+						value: '14',
+						parent: 0
+					},
+					{
+						name: '手机费',
+						value: '140',
+						parent: '14'
+					},
+					{
+						name: '上网费',
+						value: '141',
+						parent: '14'
+					},
+					{
+						name: '邮寄费',
+						value: '142',
+						parent: '14'
+					},
+					{
+						name: '休闲娱乐',
+						value: '15',
+						parent: 0
+					},
+					{
+						name: '运动健身',
+						value: '150',
+						parent: '15'
+					},
+					{
+						name: '休闲玩乐',
+						value: '151',
+						parent: '15'
+					},
+					{
+						name: '学习进修',
+						value: '16',
+						parent: 0
+					},
+					{
+						name: '书报杂志',
+						value: '160',
+						parent: '16'
+					},
+					{
+						name: '培训进修',
+						value: '161',
+						parent: '16'
+					},
+					{
+						name: '数码装备',
+						value: '162',
+						parent: '16'
+					},
+					{
+						name: '医疗保健',
+						value: '17',
+						parent: 0
+					},
+					{
+						name: '药品费',
+						value: '170',
+						parent: '17'
+					},
+					{
+						name: '美容费',
+						value: '171',
+						parent: '17'
+					},
+					{
+						name: '金融保险',
+						value: '18',
+						parent: 0
+					},
+					{
+						name: '投资亏损',
+						value: '180',
+						parent: '18'
+					},
+					{
+						name: '税收',
+						value: '181',
+						parent: '18'
+					},
+					{
+						name: '罚款',
+						value: '182',
+						parent: '18'
+					},
+					{
+						name: '其他杂项',
+						value: '19',
+						parent: 0
+					},
+					{
+						name: '其他支出',
+						value: '190',
+						parent: '19'
+					},
 				],
 				incomeClassDatalist: [
 					{
@@ -280,6 +425,16 @@
 				}
 				else{
 					var billObj = {};
+
+					// 点击保存时， 更新时间
+					var dateTmp = new Date();
+					this.billDate = this.date.year
+												+''+dateUtil.fillZero(this.date.month)
+												+''+dateUtil.fillZero(this.date.day)
+												+''+dateUtil.fillZero(dateTmp.getHours())
+							          +''+dateUtil.fillZero(dateTmp.getMinutes())
+							          +''+dateUtil.fillZero(dateTmp.getSeconds());
+
 					billObj.id = this.billDate;
 					billObj.type = this.billType;
 					billObj.class = this.billClass;

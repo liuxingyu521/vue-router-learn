@@ -37,7 +37,7 @@
         <flow-item v-for="(monthItem, index) in flowBill" 
         :isMonthItem="true" 
         :isLast="(index == flowBill.length-1) ? true : false"
-        :headText="monthItem.month+'月'"
+        :headText="Number(monthItem.month)+'月'"
         @slideUl="slideUl"
         >
             <p>收入：{{ monthItem.totalIncome }}￥</p>
@@ -46,7 +46,7 @@
             <ul slot="dayFlow">
               <flow-item v-for="(dayItem, index) in monthItem.days"
               :isMonthItem="false"
-              :headText="dayItem.day"
+              :headText="Number(dayItem.day)"
               >
                 <div class="bill-item" v-for="(bill, index) in dayItem.bills">
                   <p>{{ bill.className == "" ? "没有记录" : bill.className }}</p>
@@ -139,6 +139,8 @@
     },
     // 挂载flow.vue的时候再次填充flow列表
     mounted: function(){
+      // 重新请求bill数据
+      this.$emit('refreshBill');
       this.filterBill();
     },
     filters: {
@@ -249,7 +251,7 @@
             _this.totalIncome = '0';
           }
           // 最新流水展示
-          _this.latestFlow.date = _this.bill.lastBill.id.slice(4,6) + '月' + _this.bill.lastBill.id.slice(6,8) + '日';
+          _this.latestFlow.date = Number(_this.bill.lastBill.id.slice(4,6)) + '月' + _this.bill.lastBill.id.slice(6,8) + '日';
           _this.latestFlow.type = _this.bill.lastBill.type == 'expend' ? '支：' : '收：';
           _this.latestFlow.money = _this.bill.lastBill.money + '¥';
         }
