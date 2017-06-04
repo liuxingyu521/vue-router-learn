@@ -11,5 +11,6 @@ export default [
       ]
     },
     { path: '/login', name: 'login', component: require('./pages/login.vue')},
-    { path: '/register', name: 'register', component: require('./pages/register.vue')}
+    { path: '/register', name: 'register', component: require('./pages/register.vue')},
+    { path: '*', name: '404NotFound', component: require('./pages/404.vue')}
 ]
