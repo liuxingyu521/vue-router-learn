@@ -25,6 +25,7 @@
       ZFooter: ZFooter
     },
     created: function(){
+      console.log(this.$router);
       var _this = this;
       _this.$emit('loading', {
         isLoading: true,
@@ -32,7 +33,8 @@
       });
 
       // 请求用户bill数据
-      axios.post('/users/id/bill')
+      var url = '/user/' + this.$router.currentRoute.path.slice(6,7) + '/bill';
+      axios.post(url)
         .then(function(response){
           if(response.data.stateCode == '1'){
             _this.$emit('loading', { isLoading: false});
@@ -65,7 +67,8 @@
           loadingText: '正在初始化数据..'
         });
 
-        axios.post('/users/id/bill')
+        var url = '/user/' + this.$router.currentRoute.path.slice(6,7) + '/bill';
+        axios.post(url)
         .then(function(response){
           if(response.data.stateCode == '1'){
             _this.$emit('loading', { isLoading: false});

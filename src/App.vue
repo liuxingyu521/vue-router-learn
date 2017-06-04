@@ -31,7 +31,6 @@
     methods: {
       // 遮罩层事件
       loading: function(data){
-        console.log('emit loading..');
         this.loadingText = data.loadingText;
         this.isLoading = data.isLoading;
       },

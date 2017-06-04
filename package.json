@@ -16,6 +16,7 @@
   "author": "Richard",
   "license": "ISC",
   "dependencies": {
+    "echarts": "^3.6.1",
     "vue": "^2.2.4",
     "vue-router": "^2.3.0",
     "vux": "^2.1.0"

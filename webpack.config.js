@@ -34,15 +34,16 @@ module.exports = {
         }]
     },
     devServer: {
-        // host: '0.0.0.0',
+        // host: '192.168.191.6',
         port: '8888',
         proxy: {
-          '/users/*': {
+          '/user/*': {
             'target': 'http://localhost:8000'
           }
         }
     },
     resolve: {
+        extensions: ['.js', '.vue', '.json'],
         alias: {
             'vue': 'vue/dist/vue.js',
         }

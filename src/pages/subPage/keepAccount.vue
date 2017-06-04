@@ -444,7 +444,8 @@
 					billObj.money = this.billMoney;
 					billObj.comment = this.billComment;
 
-					axios.post('/users/id/storeBill', billObj)
+					var url = '/user/' + this.$router.currentRoute.path.slice(6,7) + '/storeBill';
+					axios.post(url, billObj)
 					.then(function(response){
 						if(response.data.stateCode == '0'){
 							_this.$emit('toastMessage', {

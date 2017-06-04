@@ -106,15 +106,15 @@ app.post('/users/:page', function(req, res){
 })
 
 // 用户账单数据请求
-app.post('/users/:id/bill', function(req, res){
-  console.log(req.sessionID);
+app.post('/user/:id/bill', function(req, res){
+  console.log(req.params.id);
   console.log(req.session);
   var resObject = {
     stateCode: 0, // 0: 成功码， 1: 失败码，session失效，重新登录
     stateDisc: '',
     userBill: {}
   };
-  if(!req.session.userId){
+  if(!req.session.userId || req.session.userId !== req.params.id){
     resObject.stateCode = 1;
     resObject.stateDisc = 'session失效，重新登录';
     res.json(resObject);
@@ -136,13 +136,13 @@ app.post('/users/:id/bill', function(req, res){
 
 })
 
-app.post('/users/:id/storeBill', function(req, res){
+app.post('/user/:id/storeBill', function(req, res){
   var resObject = {
     stateCode: 0, // 0: 成功码， 1: 失败码，session失效，重新登录
     stateDisc: ''
   };
 
-  if(!req.session.userId){
+  if(!req.session.userId || req.session.userId !== req.params.id){
     resObject.stateCode = 1;
     resObject.stateDisc = 'session失效，重新登录';
     res.json(resObject);
