@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <div class="footer" v-show="showFoot">
     <div class="f-item" v-show="!onlyKeepAccount">
       <router-link to="flow" active-class="f-active">
         <i class="iconfont icon-liushui"></i>
@@ -33,6 +33,10 @@
       onlyKeepAccount: {
         type: Boolean,
         default: false
+      },
+      showFoot: {
+        type: Boolean,
+        default: true
       }
     },
     methods: {

@@ -2,7 +2,7 @@
   <div class="userPage">
     <z-head :showUser="showUser">账单管家</z-head>
     <router-view @toastMessage="toastMessage" :bill="bill" @onlyKeepAccount="changeFoot" @refreshBill="refreshBill"></router-view>
-    <z-footer :onlyKeepAccount="onlyKeepAccount" @changeFoot="changeFoot"></z-footer>
+    <z-footer :showFoot="showFoot" :onlyKeepAccount="onlyKeepAccount" @changeFoot="changeFoot"></z-footer>
   </div>
 </template>
 
@@ -15,6 +15,7 @@
     data: function(){
       return {
         showUser: true,
+        showFoot: true,
         onlyKeepAccount: false,
         bill: {}
       };
@@ -63,7 +64,7 @@
           isLoading: true,
           loadingText: '正在初始化数据..'
         });
-        
+
         axios.post('/users/id/bill')
         .then(function(response){
           if(response.data.stateCode == '1'){

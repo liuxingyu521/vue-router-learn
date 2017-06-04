@@ -27,6 +27,7 @@
 				<input type="text" class="input-comment" placeholder="...(20字以内)" v-model="billComment">
 			</div>
 		</div>
+		<p class="tip">:）好的习惯，从记账开始哦～</p>
 		<class-selector
 		v-model="showClassSelector"
 		:noHead="true"
@@ -416,6 +417,7 @@
 				console.log(this.billDate);
 			},
 			sendBill: function(){
+				var _this = this;
 				if(this.billMoney == ''){
 					this.$emit('toastMessage', {
 						toastMessage: '请输入账单金额',
@@ -444,8 +446,30 @@
 
 					axios.post('/users/id/storeBill', billObj)
 					.then(function(response){
+						if(response.data.stateCode == '0'){
+							_this.$emit('toastMessage', {
+								toastMessage: response.data.stateDisc,
+								isToast: true,
+								position: 'center'
+							});
 
+							_this.$emit('onlyKeepAccount',{
+			          onlyKeepAccount: false
+			        });
+			        _this.$emit('refreshBill');
+							_this.$router.push('flow');
+						}
+						else{
+							_this.$emit('toastMessage', {
+								toastMessage: '保存失败，请稍后再试',
+								isToast: true,
+								position: 'center'
+							})
+						}
 					})
+					.catch(function(error){
+	          console.log(error);
+	        })
 				}
 			}
 		},
@@ -506,6 +530,11 @@
     background: #ff8737;
     font-size: 1.1rem;
     color: white;
+	}
+	.container p.tip{
+		padding: 2rem 5rem;
+    color: #5866e4;
+    font-family: cursive;
 	}
 	.formItem{
 		font-size: 1.2rem;

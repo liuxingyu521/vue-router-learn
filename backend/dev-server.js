@@ -137,7 +137,11 @@ app.post('/users/:id/bill', function(req, res){
 })
 
 app.post('/users/:id/storeBill', function(req, res){
-  console.log(req.body);
+  var resObject = {
+    stateCode: 0, // 0: 成功码， 1: 失败码，session失效，重新登录
+    stateDisc: ''
+  };
+
   if(!req.session.userId){
     resObject.stateCode = 1;
     resObject.stateDisc = 'session失效，重新登录';
@@ -344,11 +348,7 @@ app.post('/users/:id/storeBill', function(req, res){
     } 
     // 数据库中为空账单
     else{
-      
-
       curUser.bill.years = [];
-      
-      
 
       yearBill.year = billYear;
       monthBill.month = billMonth;
@@ -382,7 +382,8 @@ app.post('/users/:id/storeBill', function(req, res){
       // console.log(err);
     });
 
-    res.json(userDatabase);
+    resObject.stateDisc = '保存成功～';
+    res.json(resObject);
     res.end();
   }
 })
