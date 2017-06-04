@@ -61,7 +61,7 @@
         <flow-item v-for="(dayItem, index) in flowBill"
         :isMonthItem="false"
         :isLast="(index == flowBill.length-1) ? true : false"
-        :headText="dayItem.day"
+        :headText="Number(dayItem.day)"
         >
           <div class="bill-item" v-for="(bill, index) in dayItem.bills">
             <p>{{ bill.className == "" ? "没有记录" : bill.className }}</p>
@@ -140,7 +140,7 @@
     // 挂载flow.vue的时候再次填充flow列表
     mounted: function(){
       // 重新请求bill数据
-      this.$emit('refreshBill');
+      // this.$emit('refreshBill');
       this.filterBill();
     },
     filters: {
@@ -348,7 +348,9 @@
     height: 2.5rem;
     line-height: 2.5rem;
   }
-  .totalDisplay .display .display-title select.flow-type{
+  .totalDisplay .display .display-title select.flow-type,
+  select.bill-type,
+  select.bill-year-month{
     margin: 0 .5rem 0 1rem;
     padding: 0 1rem 0 .5rem;
     box-shadow: inset -2px -3px 2px 0px rgba(204, 204, 204, .8);
