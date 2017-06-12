@@ -208,6 +208,7 @@
 					'10':0, '11': 0, '12': 0, '13': 0, '14': 0, '15': 0,
 					'16':0, '17': 0, '18': 0, '19': 0, '20': 0, '21': 0
 				}
+				var titleText;
 				var seriesData = [],
 						legendData = [];
 				var seriesExpendData = [
@@ -460,12 +461,26 @@
         if(_this.billType == 'expend'){
         	seriesData = seriesExpendData;
         	legendData = legendExpendData;
+        	if(_this.billYearMonth == '年'){
+        		titleText = _this.showYear + '年支出情况'
+        	}else{
+        		titleText = _this.showYear + '年' + _this.showMonth + '月支出情况';
+        	}
         }
         else{
         	seriesData = seriesIncomeData;
         	legendData = legendIncomeData;
+        	if(_this.billYearMonth == '年'){
+        		titleText = _this.showYear + '年收入情况'
+        	}else{
+        		titleText = _this.showYear + '年' + _this.showMonth + '月收入情况';
+        	}
         }
+
         _this.myChart.setOption({
+        	title: {
+						text: titleText
+					},
         	legend:{
 						data: legendData
 					},

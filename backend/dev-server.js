@@ -21,10 +21,6 @@ app.use(session({
 app.post('/users/:page', function(req, res){
   // 每请求一次，查询一次数据库
   var userDatabase = require('./database.json');
-  // console.log(userDatabase); 待解决..(已解决)控制台输出了对象名
-  //    [ { username: 'Richard', password: '000000' },
-  //    { username: 'sss', password: 'sss' },
-  //    UserConfig { username: '1', password: '1' } ]
 
   var username = req.body.username;
   var password = req.body.password;
