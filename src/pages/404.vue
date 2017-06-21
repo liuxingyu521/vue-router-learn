@@ -17,7 +17,7 @@
 <style>
 	.notfound{
 		background-image: url('../assets/img/404.png');
-		background-size: contain;
+		background-size: cover;
 	}
 	.notfound span{
     display: block;
