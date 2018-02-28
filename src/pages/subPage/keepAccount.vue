@@ -444,7 +444,7 @@
 					billObj.money = this.billMoney;
 					billObj.comment = this.billComment;
 
-					var url = '/user/' + this.$router.currentRoute.path.slice(6,7) + '/storeBill';
+					var url = '/user/' + this.$router.currentRoute.params.id + '/storeBill';
 					axios.post(url, billObj)
 					.then(function(response){
 						if(response.data.stateCode == '0'){

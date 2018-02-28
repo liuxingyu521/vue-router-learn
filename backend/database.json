@@ -51,6 +51,90 @@
           }
         ]
       }
+    },
+    {
+      "username": "232",
+      "password": "123",
+      "bill": {
+        "lastBill": {
+          "id": "20180225161557",
+          "type": "income",
+          "class": "200",
+          "className": "职业收入",
+          "money": "30000",
+          "comment": "happy"
+        },
+        "years": [
+          {
+            "monthes": [
+              {
+                "days": [
+                  {
+                    "bills": [
+                      {
+                        "id": "20180228160511",
+                        "type": "expend",
+                        "class": "100",
+                        "className": "食品酒水",
+                        "money": "20",
+                        "comment": "饺子"
+                      }
+                    ],
+                    "day": "28",
+                    "totalExpend": "20",
+                    "totalIncome": "0"
+                  },
+                  {
+                    "bills": [
+                      {
+                        "id": "20180225161557",
+                        "type": "income",
+                        "class": "200",
+                        "className": "职业收入",
+                        "money": "30000",
+                        "comment": "happy"
+                      }
+                    ],
+                    "day": "25",
+                    "totalExpend": "0",
+                    "totalIncome": "30000"
+                  }
+                ],
+                "month": "02",
+                "totalExpend": "20",
+                "totalIncome": "30000",
+                "remain": "29980"
+              },
+              {
+                "days": [
+                  {
+                    "bills": [
+                      {
+                        "id": "20180110160717",
+                        "type": "expend",
+                        "class": "110",
+                        "className": "衣服饰品",
+                        "money": "260",
+                        "comment": "卫衣"
+                      }
+                    ],
+                    "day": "10",
+                    "totalExpend": "260",
+                    "totalIncome": "0"
+                  }
+                ],
+                "month": "01",
+                "totalExpend": "260",
+                "totalIncome": "0",
+                "remain": "-260"
+              }
+            ],
+            "year": "2018",
+            "totalExpend": "280",
+            "totalIncome": "30000"
+          }
+        ]
+      }
     }
   ]
 }

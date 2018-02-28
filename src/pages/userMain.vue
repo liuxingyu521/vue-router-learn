@@ -33,7 +33,7 @@
       });
 
       // 请求用户bill数据
-      var url = '/user/' + this.$router.currentRoute.path.slice(6,7) + '/bill';
+      var url = '/user/' + this.$router.currentRoute.params.id + '/bill';
       axios.post(url)
         .then(function(response){
           if(response.data.stateCode == '1'){
@@ -67,7 +67,7 @@
           loadingText: '正在初始化数据..'
         });
 
-        var url = '/user/' + this.$router.currentRoute.path.slice(6,7) + '/bill';
+        var url = '/user/' + this.$router.currentRoute.params.id + '/bill';
         axios.post(url)
         .then(function(response){
           if(response.data.stateCode == '1'){
